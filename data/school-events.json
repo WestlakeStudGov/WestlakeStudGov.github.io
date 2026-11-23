@@ -1,0 +1,356 @@
+{
+ "source": "https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/28516/cms/events/generate_ical?filter_ids&section_ids",
+ "updated": "2026-11-23T23:42:24Z",
+ "events": [
+  {
+   "id": "whs-bfe32d7b09844e26aa43ccfe",
+   "title": "Fall Show",
+   "start": "2026-11-23T19:00",
+   "end": "2026-11-23T22:00",
+   "location": "",
+   "description": "",
+   "category": "theater",
+   "moreDates": [
+    {
+     "date": "2026-11-24"
+    }
+   ]
+  },
+  {
+   "id": "whs-3d942beb187148488ebc0c53",
+   "title": "Boys Basketball vs Lehi/Girls vs Lone Peak",
+   "start": "2026-12-01T15:00",
+   "end": "2026-12-01T21:30",
+   "location": "Main Gym, East Aux Gym",
+   "description": "3:00 Soph boys east aux gym\n4:30 Soph girls east aux gym\n3:00 JV Girls Main gym\n4:30 JV Boys main gym\n6:00 Varsity Girls Main gym\n7:30 Varsity Boys Main gym",
+   "category": "basketball",
+   "moreDates": []
+  },
+  {
+   "id": "whs-c5820c5026da43a4b73409af",
+   "title": "Zero Fatalities",
+   "start": "2026-12-01T18:00",
+   "end": "2026-12-01T19:00",
+   "location": "Auditorium",
+   "description": "",
+   "category": "community",
+   "moreDates": []
+  },
+  {
+   "id": "whs-a10bd0f3bb1f4fefa2e798c5",
+   "title": "Girls Wrestling vs Corner Canyon",
+   "start": "2026-12-03T18:00",
+   "end": "2026-12-03T21:00",
+   "location": "Main Gym",
+   "description": "",
+   "category": "wrestling",
+   "moreDates": []
+  },
+  {
+   "id": "whs-9fc0fed7cc4b4b4484c40826",
+   "title": "Ballroom Concert",
+   "start": "2026-12-04T17:00",
+   "end": "2026-12-04T18:30",
+   "location": "Auditorium",
+   "description": "Jared",
+   "category": "dance",
+   "moreDates": []
+  },
+  {
+   "id": "whs-d47a1a16600346bfa9bb9ad8",
+   "title": "Orchestra Concert",
+   "start": "2026-12-07T19:00",
+   "end": "2026-12-07T21:00",
+   "location": "",
+   "description": "Marlayne",
+   "category": "concert",
+   "moreDates": []
+  },
+  {
+   "id": "whs-7028b959f85c4be38e1c2dba",
+   "title": "Band Concert",
+   "start": "2026-12-08T19:00",
+   "end": "2026-12-08T21:00",
+   "location": "",
+   "description": "Quinn",
+   "category": "concert",
+   "moreDates": []
+  },
+  {
+   "id": "whs-25fd330cdb9a42a2913f6ca6",
+   "title": "Wrestling vs Mountain Ridge",
+   "start": "2026-12-09T17:00",
+   "end": "2026-12-09T20:45",
+   "location": "Main Gym",
+   "description": "5:00 JV \n6:00 Varsity Girls \n7:00 Varsity Boys",
+   "category": "wrestling",
+   "moreDates": []
+  },
+  {
+   "id": "whs-59244e8bcbdb4f8591e470b9",
+   "title": "Jazz Band Concert",
+   "start": "2026-12-09T19:00",
+   "end": "2026-12-09T21:00",
+   "location": "",
+   "description": "Matt",
+   "category": "concert",
+   "moreDates": []
+  },
+  {
+   "id": "whs-9b73350e2d9c4bc0a0a0ca34",
+   "title": "Choir Concert",
+   "start": "2026-12-14T19:00",
+   "end": "2026-12-14T21:00",
+   "location": "",
+   "description": "Eric",
+   "category": "concert",
+   "moreDates": []
+  },
+  {
+   "id": "whs-faa17d21c5f14261a803c186",
+   "title": "Girls Wrestling vs Hillcrest",
+   "start": "2026-12-15T18:00",
+   "end": "2026-12-15T21:00",
+   "location": "Main Gym",
+   "description": "",
+   "category": "wrestling",
+   "moreDates": []
+  },
+  {
+   "id": "whs-4f7c33e47a8c4ec6a993eabb",
+   "title": "Dance Concerts",
+   "start": "2026-12-16T17:00",
+   "end": "2026-12-16T19:00",
+   "location": "",
+   "description": "Matt",
+   "category": "dance",
+   "moreDates": []
+  },
+  {
+   "id": "whs-cc3deedc90c341769a958d16",
+   "title": "Wrestling vs Copper Hills",
+   "start": "2026-12-16T17:00",
+   "end": "2026-12-16T21:00",
+   "location": "Main Gym",
+   "description": "5:00 JV \n6:00 Varsity Girls \n7:00 Varsity Boys",
+   "category": "wrestling",
+   "moreDates": []
+  },
+  {
+   "id": "whs-f492e3deb72e4439b88610b7",
+   "title": "Dance Concert",
+   "start": "2026-12-16T19:00",
+   "end": "2026-12-16T21:00",
+   "location": "",
+   "description": "Debbie",
+   "category": "dance",
+   "moreDates": []
+  },
+  {
+   "id": "whs-330b5ffe9f83497f88883f2f",
+   "title": "Basketball vs Herriman",
+   "start": "2027-01-05T15:00",
+   "end": "2027-01-05T22:00",
+   "location": "Main Gym, East Aux Gym",
+   "description": "3:00 Soph Boys - east aux gym\n4:30 Soph Girls - east aux gym\n3:00 JV Girls - main gym\n4:30 JV Boys - main gym\n6:00 Varsity Girls - main\n7:30 Varsity Boys - main",
+   "category": "basketball",
+   "moreDates": []
+  },
+  {
+   "id": "whs-cbed2c1e1cf046ffb8d905f1",
+   "title": "Girls Wrestling vs Bingham",
+   "start": "2027-01-13T18:00",
+   "end": "2027-01-13T21:00",
+   "location": "Main Gym",
+   "description": "",
+   "category": "wrestling",
+   "moreDates": []
+  },
+  {
+   "id": "whs-fa13c9e927884e0682b612e1",
+   "title": "Basketball vs Copper Hills",
+   "start": "2027-01-15T15:00",
+   "end": "2027-01-15T21:30",
+   "location": "Main Gym, East Aux Gym",
+   "description": "3:00 Soph Boys - east aux gym\n4:30 Soph Girls - east aux gym\n3:00 JV Girls - main gym\n4:30 JV Boys - main gym\n6:00 Varsity Girls - main\n7:30 Varsity Boys - main",
+   "category": "basketball",
+   "moreDates": []
+  },
+  {
+   "id": "whs-ee877cb7df9f4c0b97fb6432",
+   "title": "Boys Wrestling vs Cedar Valley",
+   "start": "2027-01-20T17:00",
+   "end": "2027-01-20T21:00",
+   "location": "Main Gym",
+   "description": "5:00 JV \n6:00 Varsity Girls \n7:00 Varsity Boys",
+   "category": "wrestling",
+   "moreDates": []
+  },
+  {
+   "id": "whs-5160cb7ddce6430cad6b65cf",
+   "title": "Boys Basketball vs Bingham",
+   "start": "2027-01-22T15:30",
+   "end": "2027-01-22T21:00",
+   "location": "Main Gym",
+   "description": "3:30 Soph \n5:15 JV \n7:00 Varsity",
+   "category": "basketball",
+   "moreDates": []
+  },
+  {
+   "id": "whs-e6c6abec6bc64227880d71bb",
+   "title": "Orchestra Concert",
+   "start": "2027-02-01T19:00",
+   "end": "2027-02-01T21:00",
+   "location": "",
+   "description": "Debbie",
+   "category": "concert",
+   "moreDates": []
+  },
+  {
+   "id": "whs-1f42e26ab4ad46b39927842d",
+   "title": "Basketball vs Cedar Valley",
+   "start": "2027-02-02T15:00",
+   "end": "2027-02-02T21:45",
+   "location": "Main Gym, East Aux Gym",
+   "description": "3:00 Soph Boys - east aux gym\n4:30 Soph Girls - east aux gym\n3:00 JV Girls - main gym\n4:30 JV Boys - main gym\n6:00 Varsity Girls - main\n7:30 Varsity Boys - main",
+   "category": "basketball",
+   "moreDates": []
+  },
+  {
+   "id": "whs-9a0d0f66708043acb0fcd6ad",
+   "title": "Zero Fatalities",
+   "start": "2027-02-02T18:00",
+   "end": "2027-02-02T19:00",
+   "location": "Auditorium",
+   "description": "",
+   "category": "community",
+   "moreDates": []
+  },
+  {
+   "id": "whs-dd211a2ec5d9442e86a77df5",
+   "title": "Basketball vs Riverton",
+   "start": "2027-02-12T15:00",
+   "end": "2027-02-12T21:30",
+   "location": "Main Gym, East Aux Gym",
+   "description": "3:00 Soph Boys - east aux gym\n4:30 Soph Girls - east aux gym\n3:00 JV Girls - main gym\n4:30 JV Boys - main gym\n6:00 Varsity Girls - main\n7:30 Varsity Boys - main",
+   "category": "basketball",
+   "moreDates": []
+  },
+  {
+   "id": "whs-cadafa5db9e74bf3816de8d0",
+   "title": "Girls Basketball vs Bingham",
+   "start": "2027-02-16T15:30",
+   "end": "2027-02-16T21:00",
+   "location": "Main Gym",
+   "description": "3:30 Soph\n5:15 JV \n7:00 Varsity",
+   "category": "basketball",
+   "moreDates": []
+  },
+  {
+   "id": "whs-0b0001bfa9364d17ad8c547e",
+   "title": "Basketball vs Mountain Ridge",
+   "start": "2027-02-19T15:00",
+   "end": "2027-02-19T21:30",
+   "location": "Main Gym, East Aux Gym",
+   "description": "3:00 Soph Boys - east aux gym\n4:30 Soph Girls - east aux gym\n3:00 JV Girls - main gym\n4:30 JV Boys - main gym\n6:00 Varsity Girls - main\n7:30 Varsity Boys - main",
+   "category": "basketball",
+   "moreDates": []
+  },
+  {
+   "id": "whs-60757a8258944cd5b193bb0f",
+   "title": "Jazz Concert",
+   "start": "2027-02-25T19:00",
+   "end": "2027-02-25T21:15",
+   "location": "",
+   "description": "Debbie",
+   "category": "concert",
+   "moreDates": []
+  },
+  {
+   "id": "whs-c7c42912083a4a6e8a2e807b",
+   "title": "Orchestra Concert",
+   "start": "2027-03-01T19:00",
+   "end": "2027-03-01T20:30",
+   "location": "",
+   "description": "",
+   "category": "concert",
+   "moreDates": []
+  },
+  {
+   "id": "whs-65113efe6672417ea988f433",
+   "title": "Cluster Concert",
+   "start": "2027-03-03T19:00",
+   "end": "2027-03-03T21:30",
+   "location": "",
+   "description": "",
+   "category": "concert",
+   "moreDates": []
+  },
+  {
+   "id": "whs-c66e1bdaf8dc4e46a832315f",
+   "title": "Band Concert",
+   "start": "2027-03-04T19:00",
+   "end": "2027-03-04T21:00",
+   "location": "",
+   "description": "",
+   "category": "concert",
+   "moreDates": []
+  },
+  {
+   "id": "whs-774942f4d46a47edb60c8709",
+   "title": "Drama Region Showcase",
+   "start": "2027-03-08T19:00",
+   "end": "2027-03-08T20:30",
+   "location": "Auditorium",
+   "description": "",
+   "category": "theater",
+   "moreDates": []
+  },
+  {
+   "id": "whs-a77a510ac7414d7fb7c967a0",
+   "title": "Region Chamber Choir Festival",
+   "start": "2027-03-23",
+   "end": "",
+   "location": "",
+   "description": "",
+   "category": "concert",
+   "moreDates": []
+  },
+  {
+   "id": "whs-3fc59fe11cee464bbe3c2afa",
+   "title": "Spring Musical",
+   "start": "2027-03-25T19:00",
+   "end": "2027-03-25T22:00",
+   "location": "",
+   "description": "",
+   "category": "theater",
+   "moreDates": [
+    {
+     "date": "2027-03-26"
+    },
+    {
+     "date": "2027-03-27"
+    },
+    {
+     "date": "2027-03-28"
+    },
+    {
+     "date": "2027-03-29"
+    },
+    {
+     "date": "2027-03-30"
+    }
+   ]
+  },
+  {
+   "id": "whs-076c3042eb494696833f0a81",
+   "title": "Zero Fatalities",
+   "start": "2027-04-22T18:00",
+   "end": "2027-04-22T19:00",
+   "location": "Auditorium",
+   "description": "",
+   "category": "community",
+   "moreDates": []
+  }
+ ]
+}

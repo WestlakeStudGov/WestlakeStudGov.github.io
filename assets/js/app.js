@@ -161,10 +161,119 @@
     return `${groupName(c)} ${role}`;
   };
 
+  /* ---------------- preset pictures ---------------- */
+  const PRESET_KINDS = [
+    ["volleyball", "Volleyball", /volleyball/i],
+    ["basketball", "Basketball", /basketball/i],
+    ["football", "Football", /football/i],
+    ["soccer", "Soccer", /soccer/i],
+    ["baseball", "Baseball", /baseball/i],
+    ["softball", "Softball", /softball/i],
+    ["tennis", "Tennis", /tennis/i],
+    ["wrestling", "Wrestling", /wrestl/i],
+    ["swim", "Swim", /swim|dive|diving/i],
+    ["track", "Track", /track|cross country|\brun\b|5k/i],
+    ["golf", "Golf", /golf/i],
+    ["cheer", "Cheer & drill", /cheer|drill/i],
+    ["christmas", "Christmas Jars", /christmas|jar|son of thor|muffin|gold rush|thunder trials/i],
+    ["dance", "Dance", /dance|ballroom|\bball\b|prom|sadies|homecoming/i],
+    ["concert", "Concert", /concert|band\b|choir|orchestra|madrigal|music|symphony/i],
+    ["theater", "Theater", /show\b|musical|\bplay\b|theat|drama|one.?act/i],
+    ["community", "Community", /community|festival|carnival|fair\b|parent|family|zero fatalities|service|breakfast/i],
+    ["school", "Westlake bolt", /./],
+  ];
+  const BUILTIN_PRESETS = PRESET_KINDS.flatMap(([k, label]) =>
+    ["navy", "blue"].map((bg) => ({ src: `assets/presets/${k}-${bg}.svg`, label: `${label} (${bg})`, kind: k }))
+  ).concat([
+    { src: "assets/img/thunder-mascot.png", label: "Thunder mascot logo", kind: "logo" },
+    { src: "assets/img/thor-mighty-thunder.png", label: "Mighty Thunder logo", kind: "logo" },
+    { src: "assets/img/westlake-thunder-wordmark.png", label: "Westlake Thunder wordmark", kind: "logo" },
+    { src: "assets/img/thunder-hammer.png", label: "Thunder hammer logo", kind: "logo" },
+  ]);
+  WSG.presets = () => BUILTIN_PRESETS.concat((D().site.presets || []).filter((x) => x && x.src).map((x) => ({ ...x, custom: true })));
+  const hashStr = (t) => [...String(t)].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
+  // A matching preset picture for anything without a photo (alternates navy/blue so a row of games doesn't look identical)
+  function autoPhoto(title, kind, id) {
+    const k = kind || (PRESET_KINDS.find(([, , rx]) => rx.test(title || "")) || ["school"])[0];
+    return `assets/presets/${k}-${hashStr(id || title) % 2 ? "blue" : "navy"}.svg`;
+  }
+  const evPhoto = (e) => e.photo || autoPhoto(e.title, e.category, e.id);
+
+  /* ---------------- school calendar events ---------------- */
+  const normTitle = (t) => String(t || "").toLowerCase().replace(/[^a-z0-9]/g, "").replace(/s$/, "");
+  function schoolEvents() {
+    const cfg = D().site.schoolCalendar || {};
+    if (cfg.on === false) return [];
+    const over = D().site.schoolOverrides || {};
+    const mine = D().events.map((e) => normTitle(e.title)).filter((t) => t.length > 3);
+    return ((WSG.school && WSG.school.events) || [])
+      .filter((e) => !(over[e.id] && over[e.id].hide))
+      .filter((e) => {
+        const t = normTitle(e.title);
+        return !mine.some((m) => t.includes(m) || m.includes(t));
+      })
+      .map((e) => ({
+        ...e,
+        ours: false,
+        school: true,
+        featured: false,
+        committee: "",
+        audiences: ["community", "students", "families"],
+        photo: (over[e.id] && over[e.id].photo) || "",
+        homeShow: (over[e.id] && over[e.id].homeShow) || "auto",
+        photos: [],
+        days: [],
+      }));
+  }
+  const allEvents = () => D().events.concat(schoolEvents());
+  WSG.allEvents = allEvents;
+  WSG.schoolEventsRaw = () => (WSG.school && WSG.school.events) || [];
+
+  // Which events go in "Coming up" on the home page
+  function homePicks() {
+    const now = new Date();
+    now.setHours(0, 0, 0, 0);
+    const days = (e) => {
+      const d = toDate(String(nextOcc(e).start || "").slice(0, 10));
+      return d && !isNaN(d) ? Math.round((d - now) / 864e5) : null;
+    };
+    // forced first, then anything today or tomorrow, then big events, then the rest by date
+    const rank = (e) => (e.homeShow === "always" ? 0 : (days(e) ?? 99) <= 1 ? 1 : e.ours && e.featured ? 2 : 3);
+    return allEvents()
+      .filter((e) => !isPast(e) && e.homeShow !== "never")
+      .filter((e) => {
+        if (e.homeShow === "always") return true;
+        const n = days(e);
+        if (n == null) return false;
+        if (!e.ours) return n <= 1; // promoted and school events: today or tomorrow only
+        return n <= (e.featured ? 92 : 31); // big events 3 months ahead, the rest 1 month
+      })
+      .sort((a, b) => rank(a) - rank(b) || byStart(a, b))
+      .slice(0, 6);
+  }
+
   /* edit pins (only shown in edit mode) */
   WSG.pin = (target, label = "Edit") =>
     WSG.editMode ? `<button class="edit-pin" data-edit="${esc(target)}" type="button">✎ ${esc(label)}</button>` : "";
   const pin = WSG.pin;
+
+  /* small message at the bottom of the screen */
+  let flashTimer = 0;
+  function flash(msg) {
+    let el = $("#flash");
+    if (!el) {
+      el = document.createElement("div");
+      el.id = "flash";
+      el.className = "flash";
+      el.setAttribute("role", "status");
+      document.body.appendChild(el);
+    }
+    el.textContent = msg;
+    el.classList.add("show");
+    clearTimeout(flashTimer);
+    flashTimer = setTimeout(() => el.classList.remove("show"), 2600);
+  }
+  WSG.flash = flash;
 
   /* ---------------- social icons ---------------- */
   const ICONS = {
@@ -354,10 +463,10 @@
     const tags = (ev.audiences || []).map((a) => audience(a)).filter(Boolean);
     const past = isPast(ev);
     const link = ev.link && !past ? `<a class="ev-link" href="${esc(safeUrl(ev.link))}">${esc(ev.linkLabel || "Tickets & sign-up")} <span class="arr">→</span></a>` : "";
-    return `<div class="ev-card rv ${opts.small ? "small" : ""} ${past ? "past" : ""}" role="button" tabindex="0" data-event="${esc(ev.id)}">
+    return `<div class="ev-card rv ${opts.small ? "small" : ""} ${past ? "past" : ""} ${opts.cls || ""}" role="button" tabindex="0" data-event="${esc(ev.id)}">
       <div class="media">${dateBlock(ev)}${
-        opts.small ? "" : ev.ours ? `<span class="badge-ours">${esc(D().site.short || "WSG")}</span>` : `<span class="badge-ours badge-promo">We're promoting</span>`
-      }${img(ev.photo, ev.title, ev.title)}</div>
+        opts.small ? "" : ev.ours ? `<span class="badge-ours">${esc(D().site.short || "WSG")}</span>` : `<span class="badge-ours badge-promo">${ev.school ? "Westlake High" : "We're promoting"}</span>`
+      }${img(evPhoto(ev), ev.title, ev.title)}</div>
       <div class="ev-body">
         <h3>${esc(ev.title)}</h3>
         <div class="ev-meta"><span>${esc(fmtWhen(ev))}</span>${ev.location ? `<span>${esc(ev.location)}</span>` : ""}${
@@ -455,11 +564,9 @@
     const s = D().site;
     const words = (s.name || "Student Government").split(/\s+/);
     const last = words.pop();
-    const upcoming = D().events.filter((e) => !isPast(e)).sort(byStart);
-    let featured = upcoming.filter((e) => e.ours && e.featured);
-    if (!featured.length) featured = upcoming.filter((e) => e.ours);
-    featured = featured.slice(0, 3);
-    const more = upcoming.filter((e) => !featured.includes(e)).slice(0, 3);
+    const picks = homePicks();
+    const featured = picks.slice(0, 3);
+    const more = picks.slice(3);
     const groups = D().committees;
     const statement = esc(s.intro || "")
       .split(/\s+/)
@@ -504,7 +611,7 @@
             ? `<div class="feature-list">${featured
                 .map(
                   (e) => `<button class="feature rv" type="button" data-event="${esc(e.id)}">
-              <div class="media">${img(e.photo, e.title, e.title)}</div>
+              <div class="media">${img(evPhoto(e), e.title, e.title)}</div>
               <div class="feature-body"><div class="feature-date">${esc(fmtWhen(e))}</div><h3>${esc(e.title)}</h3><p>${esc(e.description || "")}</p><span class="btn btn-gold" style="align-self:flex-start">Details <span class="arr">→</span></span></div>
             </button>`
                 )
@@ -579,9 +686,9 @@
       <section class="section tight"><div class="wrap" id="evList">${pin("events", "Edit events")}${eventsList()}</div></section>`;
   }
   function eventsList() {
-    const all = D().events.filter((e) => evFilter === "all" || (e.audiences || []).includes(evFilter));
+    const all = allEvents().filter((e) => evFilter === "all" || (e.audiences || []).includes(evFilter));
     const up = all.filter((e) => !isPast(e)).sort(byStart);
-    const past = all.filter(isPast).sort((a, b) => byStart(b, a));
+    const past = all.filter((e) => isPast(e) && !e.school).sort((a, b) => byStart(b, a));
     const ours = up.filter((e) => e.ours);
     const other = up.filter((e) => !e.ours);
     const short = D().site.short || "WSG";
@@ -590,7 +697,13 @@
       <div class="ev-section"><div class="eyebrow">Planned by ${esc(short)}</div><h2>Our events</h2><p class="muted">Events student government is putting on${esc(label)}.</p>
         ${ours.length ? `<div class="ev-grid">${ours.map((e) => evCard(e)).join("")}</div>` : `<div class="empty">No upcoming events here yet.</div>`}</div>
       <div class="ev-section"><div class="eyebrow">Around Westlake</div><h2>Also happening</h2><p class="muted">Other school events we're promoting.</p>
-        ${other.length ? `<div class="ev-grid">${other.map((e) => evCard(e)).join("")}</div>` : `<div class="empty">Nothing else on the calendar right now.</div>`}</div>
+        ${
+          other.length
+            ? `<div class="ev-grid ev-clip">${other.map((e, i) => evCard(e, { cls: i >= 9 ? "ev-extra" : "" })).join("")}</div>${
+                other.length > 9 ? `<button class="btn btn-line ev-more-btn" type="button" data-showmore>Show all ${other.length} events <span class="arr">↓</span></button>` : ""
+              }`
+            : `<div class="empty">Nothing else on the calendar right now.</div>`
+        }</div>
       ${
         past.length
           ? `<details class="ev-section past"><summary><h2>Past events</h2></summary><p class="muted">Photos from events that already happened.</p><div class="ev-grid">${past
@@ -1039,7 +1152,7 @@
   WSG.schedule = schedule;
 
   function openEvent(id) {
-    const ev = D().events.find((e) => e.id === id);
+    const ev = allEvents().find((e) => e.id === id);
     if (!ev) return;
     const c = committee(ev.committee);
     const tags = (ev.audiences || []).map(audience).filter(Boolean);
@@ -1049,9 +1162,9 @@
     const pastYears = others.length ? `<div class="m-past"><h3>Past ${esc(series.item.title)}</h3><button class="btn btn-line" type="button" data-past="${esc(ev.series)}">View past events <span class="arr">→</span></button></div>` : "";
     $("#modalCard").innerHTML = `
       <button class="modal-close" data-close aria-label="Close">&times;</button>
-      <div class="media m-media">${img(ev.photo, ev.title, ev.title)}</div>
+      <div class="media m-media">${img(evPhoto(ev), ev.title, ev.title)}</div>
       <div class="m-body">
-        <div class="eyebrow">${ev.ours ? (c ? esc(c.name) : esc(D().site.short)) : "We're promoting"}</div>
+        <div class="eyebrow">${ev.ours ? (c ? esc(c.name) : esc(D().site.short)) : ev.school ? "From the Westlake High calendar" : "We're promoting"}</div>
         <h2 id="modalTitle">${esc(ev.title)}</h2>
         ${pin("event:" + ev.id, "Edit this event")}
         <div class="m-facts">
@@ -1347,6 +1460,20 @@
   /* ---------------- events ---------------- */
   document.addEventListener("click", (e) => {
     const t = e.target;
+    const more = t.closest("[data-showmore]");
+    if (more) {
+      more.previousElementSibling.classList.add("open");
+      more.remove();
+      return;
+    }
+    // Email links: copy the address (always works) and still let the email app open if there is one
+    const mail = t.closest('a[href^="mailto:"]');
+    if (mail && !t.closest(".edit-pin")) {
+      const addr = decodeURIComponent(mail.getAttribute("href").slice(7).split("?")[0]);
+      const done = () => flash(`Email copied: ${addr}`);
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(addr).then(done, () => flash(addr));
+      else flash(addr);
+    }
     const sc = t.closest("[data-scrollto]");
     if (sc) {
       const el = document.getElementById(sc.dataset.scrollto);
@@ -1405,7 +1532,7 @@
     if (t.closest("[data-lbclose]") || t.id === "lightbox") return ($("#lightbox").hidden = true);
     const ics = t.closest("[data-ics]");
     if (ics) {
-      const ev = D().events.find((x) => x.id === ics.dataset.ics);
+      const ev = allEvents().find((x) => x.id === ics.dataset.ics);
       if (ev) downloadIcs(ev);
       return;
     }
@@ -1458,6 +1585,11 @@
       WSG.totals = await getJson("data/total.json");
     } catch (_) {
       WSG.totals = { pages: {} };
+    }
+    try {
+      WSG.school = await getJson("data/school-events.json");
+    } catch (_) {
+      WSG.school = { events: [] };
     }
     if (window.WSGEditor && WSGEditor.restoreDraft) WSGEditor.restoreDraft();
     render({ first: true });

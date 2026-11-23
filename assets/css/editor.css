@@ -109,3 +109,17 @@ body.ed-panel-open .ed-bar{left:calc((100vw - min(460px,100vw)) / 2)}
 .ed-color{display:flex;gap:8px;align-items:center}
 .ed-color input[type=color]{width:52px;height:42px;border:1.5px solid var(--line);border-radius:10px;padding:3px;background:var(--white);flex:none}
 .ed-color input[type=text]{flex:1}
+
+/* preset library */
+.ed-dialog-card.wide{width:min(760px,100%)}
+.ed-presets{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:8px;margin:6px 0 10px}
+.ed-preset{border:1.5px solid var(--line);background:var(--white);border-radius:12px;padding:5px;display:flex;flex-direction:column;gap:4px;text-align:left;cursor:pointer;color:var(--navy)}
+.ed-preset img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:8px;display:block;background:var(--paper)}
+.ed-preset span{font:600 11px var(--body);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ed-preset:hover{border-color:var(--navy)}
+/* school events list */
+.ed-school .ed-tools{gap:6px;align-items:center}
+.ed-school select{border:1.5px solid var(--line);border-radius:8px;padding:6px;font:13px var(--body);color:var(--navy);background:var(--white)}
+.ed-school .ed-btn{padding:6px 12px;font-size:13px}
+.ed-school.off .ed-item-main{opacity:.45;text-decoration:line-through}
+@media (max-width:520px){.ed-school{flex-wrap:wrap}.ed-school .ed-tools{width:100%;justify-content:flex-end}}

@@ -240,7 +240,8 @@
     event: [
       { k: "title", t: "text", l: "Event name", max: 50 },
       { k: "ours", t: "check", l: "Planned by student government", hint: "Unchecked means it's an event we're promoting, like a game. It shows under \"Also happening\"." },
-      { k: "featured", t: "check", l: "Feature on the home page", hint: "Big upcoming events. Up to 3 show." },
+      { k: "featured", t: "check", l: "Big event", hint: "Big events (like prom or homecoming) show on the home page up to 3 months ahead. Other events show 1 month ahead." },
+      { k: "homeShow", t: "select", l: "Home page", hint: "Automatic follows the rules above, and the best 6 show. Always or Never overrides that.", opts: () => [opt("auto", "Automatic"), opt("always", "Always show"), opt("never", "Never show")], dflt: "auto" },
       { k: "start", t: "datetime", l: "Starts", hint: "For a week-long event, pick the first day here and the last day under Ends." },
       { k: "end", t: "datetime", l: "Ends (optional)" },
       { k: "timeNote", t: "text", l: "Time in words (optional)", max: 40, ph: "Lunch, After 2nd period…", hint: "Use this instead of a clock time, like \"Lunch\". Shows in place of the times above." },
@@ -703,6 +704,28 @@
         draw(false);
       });
       btns.appendChild(up);
+      const pre = el("button", { type: "button", class: "ed-btn ed-btn-soft", disabled: busy }, "Pick a preset");
+      pre.addEventListener("click", async () => {
+        const src = await pickPreset();
+        if (!src) return;
+        obj[f.k] = src;
+        onChange();
+        draw(false);
+      });
+      btns.appendChild(pre);
+      const isPreset = obj[f.k] && WSG.presets().some((x) => x.src === obj[f.k]);
+      if (obj[f.k] && !isPreset) {
+        const save = el("button", { type: "button", class: "ed-btn ed-btn-ghost" }, "Save as preset");
+        save.addEventListener("click", async () => {
+          const label = await askText("Save as preset", "Name it so it's easy to find later, like \"Volleyball team huddle\".", "Preset name");
+          if (!label) return;
+          (D().site.presets || (D().site.presets = [])).push({ src: obj[f.k], label });
+          changed();
+          toast("Saved as a preset. It's in \"Pick a preset\" everywhere now.");
+          draw(false);
+        });
+        btns.appendChild(save);
+      }
       if (obj[f.k]) {
         const rm = el("button", { type: "button", class: "ed-btn ed-btn-ghost" }, "Remove");
         rm.addEventListener("click", () => {
@@ -771,6 +794,7 @@
     { id: "committees", label: "Committees" },
     { id: "people", label: "People" },
     { id: "pages", label: "Special pages" },
+    { id: "school", label: "School events" },
     { id: "filters", label: "Filters" },
     { id: "settings", label: "Settings" },
   ];
@@ -917,6 +941,8 @@
       body.appendChild(buildForm(D().site, S.site, changed));
       body.appendChild(el("h3", {}, "Home page photos"));
       body.appendChild(buildForm(D().home, S.home, changed));
+    } else if (view.tab === "school") {
+      drawSchool(body);
     } else if (view.tab === "banner") {
       if (!D().site.announcement) D().site.announcement = { on: false, text: "", linkLabel: "", linkUrl: "", until: "" };
       body.appendChild(el("h3", {}, "Announcement banner"));
@@ -938,6 +964,54 @@
     } else if (view.tab === "settings") drawSettings(body);
     else if (view.id) drawItem(body);
     else drawList(body);
+  }
+  function drawSchool(body) {
+    const site = D().site;
+    if (!site.schoolCalendar) site.schoolCalendar = { on: true, url: "" };
+    if (!site.schoolOverrides) site.schoolOverrides = {};
+    body.appendChild(el("h3", {}, "School events"));
+    body.appendChild(
+      el(
+        "p",
+        { class: "ed-intro" },
+        "Home games, concerts, shows and community nights from the Westlake High calendar come in by themselves once a day. They show under \"Also happening\" on the Events page, and on the home page only the day before and the day of. Hide any you don't want."
+      )
+    );
+    body.appendChild(
+      buildForm(site.schoolCalendar, [
+        { k: "on", t: "check", l: "Bring in events from the Westlake High calendar" },
+        { k: "url", t: "url", l: "Calendar link (optional)", hint: "Leave blank to use the Westlake High calendar. Only change this if the school's calendar link changes." },
+      ], () => changed({ now: true }))
+    );
+    const list = WSG.schoolEventsRaw();
+    const updated = WSG.school && WSG.school.updated ? new Date(WSG.school.updated) : null;
+    body.appendChild(el("div", { class: "ed-group-title" }, `${list.length} upcoming school events${updated ? " · checked " + updated.toLocaleDateString() : ""}`));
+    if (!list.length) body.appendChild(el("p", { class: "ed-muted" }, "None yet. The list fills in after the daily check runs."));
+    const box = el("div", { class: "ed-items" });
+    list.forEach((e) => {
+      const o = site.schoolOverrides[e.id] || {};
+      const row = el("div", { class: "ed-item ed-school" + (o.hide ? " off" : "") });
+      row.appendChild(el("div", { class: "ed-item-main" }, `<b>${esc(e.title)}</b><small>${esc(WSG.fmtWhen(e))}</small>`));
+      const sel = el("select", { "aria-label": "Home page" });
+      [["auto", "Home: automatic"], ["always", "Home: always"], ["never", "Home: never"]].forEach(([v, l]) => sel.appendChild(el("option", { value: v }, l)));
+      sel.value = o.homeShow || "auto";
+      sel.addEventListener("change", () => {
+        site.schoolOverrides[e.id] = { ...(site.schoolOverrides[e.id] || {}), homeShow: sel.value };
+        changed({ now: true });
+      });
+      const hide = el("button", { type: "button", class: "ed-btn " + (o.hide ? "ed-btn-gold" : "ed-btn-ghost") }, o.hide ? "Show" : "Hide");
+      hide.addEventListener("click", () => {
+        site.schoolOverrides[e.id] = { ...(site.schoolOverrides[e.id] || {}), hide: !o.hide };
+        changed({ now: true });
+        drawPanel();
+      });
+      const tools = el("span", { class: "ed-tools" });
+      tools.appendChild(sel);
+      tools.appendChild(hide);
+      row.appendChild(tools);
+      box.appendChild(row);
+    });
+    body.appendChild(box);
   }
   function drawList(body) {
     const c = COLL[view.tab];
@@ -1146,6 +1220,53 @@
       return { owner, repo: seg && !/\.html?$/.test(seg) ? seg : host.toLowerCase() };
     }
     return { owner: "WestlakeStudGov", repo: "WestlakeStudGov.github.io" };
+  }
+
+  /* ================= preset library ================= */
+  function pickPreset() {
+    return new Promise((res) => {
+      const all = WSG.presets();
+      const groups = [
+        ["Your saved presets", all.filter((x) => x.custom)],
+        ["Sports", all.filter((x) => /volleyball|basketball|football|soccer|baseball|softball|tennis|wrestling|swim|track|golf|cheer/.test(x.kind || ""))],
+        ["Arts and events", all.filter((x) => /concert|dance|theater|community|christmas|school/.test(x.kind || ""))],
+        ["Logos", all.filter((x) => x.kind === "logo")],
+      ].filter(([, list]) => list.length);
+      const d = dialog(`<h3>Pick a preset</h3><p>Ready-made pictures in the school colors. Save your own with "Save as preset".</p>
+        ${groups
+          .map(
+            ([name, list]) => `<div class="ed-group-title">${esc(name)}</div><div class="ed-presets">${list
+              .map((x, i) => `<button type="button" class="ed-preset" data-src="${esc(x.src)}" title="${esc(x.label)}"><img src="${esc(WSG.imgSrc(x.src))}" alt="" loading="lazy"><span>${esc(x.label)}</span></button>`)
+              .join("")}</div>`
+          )
+          .join("")}
+        <div class="ed-dialog-btns"><button class="ed-btn ed-btn-ghost" data-cancel>Cancel</button></div>`);
+      d.querySelector(".ed-dialog-card").classList.add("wide");
+      d.addEventListener("click", (e) => {
+        const b = e.target.closest("[data-src]");
+        if (b || e.target.closest("[data-cancel]") || e.target === d) {
+          d.remove();
+          res(b ? b.dataset.src : null);
+        }
+      });
+    });
+  }
+  function askText(title, text, ph) {
+    return new Promise((res) => {
+      const d = dialog(`<h3>${esc(title)}</h3><p>${esc(text)}</p><input type="text" maxlength="40" placeholder="${esc(ph || "")}"><div class="ed-dialog-btns"><button class="ed-btn ed-btn-ghost" data-v="0">Cancel</button><button class="ed-btn ed-btn-navy" data-v="1">Save</button></div>`);
+      const inp = d.querySelector("input");
+      setTimeout(() => inp.focus(), 40);
+      const finish = (ok) => {
+        d.remove();
+        res(ok ? inp.value.trim() : null);
+      };
+      inp.addEventListener("keydown", (e) => e.key === "Enter" && finish(true));
+      d.addEventListener("click", (e) => {
+        const b = e.target.closest("[data-v]");
+        if (b) finish(b.dataset.v === "1");
+        else if (e.target === d) finish(false);
+      });
+    });
   }
 
   /* ================= dialogs ================= */

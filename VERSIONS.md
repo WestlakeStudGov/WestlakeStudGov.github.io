@@ -4,6 +4,7 @@ Small changes go up by .1 (1.1, 1.2 ... 1.9, 1.10, 1.11). Big changes that make 
 
 | Version | Date | What changed |
 |---|---|---|
+| 1.3 | 2026-11-23 | School calendar events (home games, concerts, shows, community nights) come in daily; preset pictures; smarter Coming up on the home page; email buttons copy the address |
 | 1.2 | 2026-11-23 | Smoother scrolling on phones, committee card fade fixed, no stray line under the cards |
 | 1.1 | 2026-11-23 | Social icons moved to the top (bar under the home photo and in the menu); removed the bottom Connect section |
 | 1.0 | 2026-11-23 | First full version: all pages, real members and events, edit mode, scoreboard, banner, Christmas Jars page (not published yet) |

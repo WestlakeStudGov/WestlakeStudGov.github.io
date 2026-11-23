@@ -60,3 +60,9 @@ Every publish is saved in this repository's history. To get an old version back,
 - `scripts/update-total.mjs` and `.github/workflows/total.yml`: the donation total.
 - Animations use GSAP and ScrollTrigger from cdnjs.
 - Preview locally with `python3 -m http.server`, then open http://localhost:8000. On localhost, edit mode offers a test mode that saves only in your browser.
+
+## School events (automatic)
+Once a day, GitHub reads the Westlake High calendar and saves home games, concerts, shows and community nights to `data/school-events.json` (the "Import school calendar events" workflow in the Actions tab). They show under "Also happening" on the Events page, and on the home page only the day before and the day of. In edit mode, the **School events** tab lets you hide any of them, force one onto the home page, or turn the import off.
+
+## Preset pictures
+Every photo spot in edit mode has **Pick a preset**: ready-made pictures in the school colors (sports, concerts, dance, theater, community, Christmas Jars) plus the Westlake logos. Any photo you upload can be saved with **Save as preset**. Events without a photo get a matching preset automatically. The built-in pictures are drawn by `scripts/make_presets.py`.
