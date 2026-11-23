@@ -5,7 +5,15 @@
   document.documentElement.classList.add("js");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const hasGsap = !!(window.gsap && window.ScrollTrigger);
-  if (hasGsap) gsap.registerPlugin(ScrollTrigger);
+  if (hasGsap) {
+    gsap.registerPlugin(ScrollTrigger);
+    // Phones show and hide the address bar while scrolling, which resizes the page.
+    // Ignoring that stops scroll effects from re-measuring and jumping mid-scroll.
+    ScrollTrigger.config({ ignoreMobileResize: true });
+  }
+  const isTouch = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+  // How far scroll-linked effects trail behind the scroll: a little trail reads as smooth, none reads as jittery
+  const SMOOTH = isTouch ? 0.9 : 0.6;
   if (reduceMotion || !hasGsap) document.documentElement.classList.add("reduce");
 
   const $ = (s, r = document) => r.querySelector(s);
@@ -1173,8 +1181,8 @@
         gsap.fromTo(im, { opacity: 0 }, { opacity: 1, duration: 1.2 });
       } else {
         gsap.fromTo(im, { scale: 1.18 }, { scale: 1, duration: 1.8, ease: "power2.out" });
-        gsap.to(im, { yPercent: 12, scale: 1.12, ease: "none", scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true } });
-        gsap.to($(".hero-inner", hero), { yPercent: -30, opacity: 0.2, ease: "none", scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true } });
+        gsap.to(im, { yPercent: 12, scale: 1.12, ease: "none", scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: SMOOTH } });
+        gsap.to($(".hero-inner", hero), { yPercent: -30, opacity: 0.2, ease: "none", scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: SMOOTH } });
       }
     }
     // Page heroes
@@ -1183,12 +1191,12 @@
       const im = $(".phero-media img", ph);
       if (im) {
         gsap.fromTo(im, { scale: 1.15 }, { scale: 1, duration: 1.6, ease: "power2.out" });
-        gsap.to(im, { yPercent: 15, ease: "none", scrollTrigger: { trigger: ph, start: "top top", end: "bottom top", scrub: true } });
+        gsap.to(im, { yPercent: 15, ease: "none", scrollTrigger: { trigger: ph, start: "top top", end: "bottom top", scrub: SMOOTH } });
       }
     });
     // Word-by-word statement
     $$("[data-words]", main).forEach((el) => {
-      gsap.to($$(".w", el), { opacity: 1, stagger: 0.06, ease: "none", scrollTrigger: { trigger: el, start: "top 80%", end: "bottom 45%", scrub: true } });
+      gsap.to($$(".w", el), { opacity: 1, stagger: 0.06, ease: "none", scrollTrigger: { trigger: el, start: "top 80%", end: "bottom 45%", scrub: SMOOTH } });
     });
     // Generic reveals
     ScrollTrigger.batch($$(".rv", main), {
@@ -1198,15 +1206,15 @@
     });
     // Photo zoom on scroll
     $$(".mosaic figure img, .cblock-media img, .hl-top .media img, .feature .media img", main).forEach((im) => {
-      gsap.fromTo(im, { scale: 1.25 }, { scale: 1, ease: "none", scrollTrigger: { trigger: im.parentElement, start: "top bottom", end: "bottom top", scrub: true } });
+      gsap.fromTo(im, { scale: 1.25 }, { scale: 1, ease: "none", scrollTrigger: { trigger: im.parentElement, start: "top bottom", end: "bottom top", scrub: SMOOTH } });
     });
     $$(".mosaic figure", main).forEach((f, i) => {
       gsap.fromTo(f, { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: (i % 3) * 0.08, scrollTrigger: { trigger: f, start: "top 92%", once: true } });
     });
     // Parallax bands
     $$("[data-parallax]", main).forEach((el) => {
-      if (el.closest(".phero")) return;
-      gsap.fromTo(el, { yPercent: -8 }, { yPercent: 8, ease: "none", scrollTrigger: { trigger: el.parentElement, start: "top bottom", end: "bottom top", scrub: true } });
+      if (el.closest(".phero") || isTouch) return;
+      gsap.fromTo(el, { yPercent: -8 }, { yPercent: 8, ease: "none", scrollTrigger: { trigger: el.parentElement, start: "top bottom", end: "bottom top", scrub: SMOOTH } });
     });
     // Pinned horizontal rail (sticky scrolling section)
     const rs = $("[data-rail]", main);
@@ -1219,7 +1227,7 @@
           ease: "none",
           scrollTrigger: { trigger: rs, start: "top top", end: () => "+=" + dist(), pin: $(".rail-pin", rs), scrub: 0.6, invalidateOnRefresh: true, anticipatePin: 1 },
         });
-        gsap.to($(".rail-progress i", rs), { scaleX: 1, ease: "none", scrollTrigger: { trigger: rs, start: "top top", end: () => "+=" + dist(), scrub: true } });
+        gsap.to($(".rail-progress i", rs), { scaleX: 1, ease: "none", scrollTrigger: { trigger: rs, start: "top top", end: () => "+=" + dist(), scrub: SMOOTH } });
       }
       gsap.fromTo($$(".rail-card", rs), { y: 80, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.07, duration: 1, ease: "power3.out", scrollTrigger: { trigger: rs, start: "top 70%", once: true } });
     }
