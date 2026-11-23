@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Westlake Student Government</title>
+<meta name="description" content="Westlake Student Government: committees, members, and upcoming events at Westlake High School.">
+<meta name="theme-color" content="#0D223F">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css?v=19">
+<link rel="stylesheet" href="assets/css/editor.css?v=19">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="announce" id="announce" role="region" aria-label="Announcement" hidden></div>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#/" aria-label="Home">
+    <span class="brand-logo" id="brandLogo"></span>
+    <span class="brand-text"><b id="brandShort">WSG</b><small id="brandSchool">Westlake High School</small></span>
+  </a>
+  <nav class="nav-links" id="navLinks" aria-label="Main"></nav>
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+</header>
+
+<div class="wipe" id="wipe" aria-hidden="true"><div class="wipe-mark" id="wipeMark">WSG</div></div>
+
+<main id="main" tabindex="-1"></main>
+
+<footer class="footer" id="footer"></footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-card" id="modalCard"></div>
+</div>
+
+<div class="lightbox" id="lightbox" hidden><button class="lb-close" data-lbclose aria-label="Close">&times;</button><img id="lbImg" alt=""><p id="lbCap"></p></div>
+
+<div id="editorRoot"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="assets/js/app.js?v=19"></script>
+<script src="assets/js/editor.js?v=19"></script>
+</body>
+</html>

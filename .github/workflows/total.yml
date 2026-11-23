@@ -1,0 +1,45 @@
+name: Update donation totals
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: totals
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Read totals from the donation pages
+        id: plain
+        run: node scripts/update-total.mjs
+      - name: Try again with a real browser if the amount didn't show up
+        if: steps.plain.outputs.need_browser == 'true'
+        continue-on-error: true
+        run: |
+          npm install --no-save --no-package-lock playwright@1.47.2
+          npx playwright install --with-deps chromium
+          node scripts/update-total.mjs --browser
+      - name: Save the new total and keep the schedule awake
+        run: |
+          # GitHub pauses scheduled runs after 60 days without changes, so touch this file about once a month.
+          if [ ! -f data/keepalive.txt ] || [ $(( $(date +%s) - $(date -d "$(cat data/keepalive.txt)" +%s 2>/dev/null || echo 0) )) -gt 2160000 ]; then
+            date -u +%Y-%m-%dT%H:%M:%SZ > data/keepalive.txt
+          fi
+          git add data/total.json data/keepalive.txt
+          if git diff --cached --quiet; then echo "Nothing to save"; exit 0; fi
+          git config user.name "wsg-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update donation total"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push

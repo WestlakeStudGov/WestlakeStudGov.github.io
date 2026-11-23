@@ -1,0 +1,1690 @@
+{
+ "site": {
+  "name": "Westlake Student Government",
+  "short": "WSG",
+  "school": "Westlake High School",
+  "tagline": "With unity, empathy, and drive, we bring energy, fun, and purpose to Westlake.",
+  "logo": "assets/img/thunder-hammer.png",
+  "heroPhoto": "assets/uploads/2026/groups/whole-council.jpg",
+  "heroCaption": "Westlake Student Government, 2026-27",
+  "intro": "Our mission is to build a spirited, inclusive community where every student feels seen, valued, and connected.",
+  "contactEmail": "westlakestudgov@gmail.com",
+  "suggestionUrl": "",
+  "socials": [
+   {
+    "label": "Instagram",
+    "url": "https://www.instagram.com/westlakestudentgovernment/"
+   },
+   {
+    "label": "TikTok",
+    "url": "https://www.tiktok.com/@westlakestudentgov"
+   },
+   {
+    "label": "Westlake High",
+    "url": "https://whs.alpineschools.org/"
+   }
+  ],
+  "sboGroupPhoto": "assets/uploads/2026/groups/sbos.jpg",
+  "advisersGroupPhoto": "assets/uploads/2026/groups/advisors.jpg",
+  "membersIntro": "Meet the students and advisors behind Westlake Student Government.",
+  "committeesIntro": "Every event at Westlake starts with one of these committees. Jump to any committee below, or open its page to see everything it plans.",
+  "eventsIntro": "Everything coming up at Westlake. Filter by who it's for.",
+  "mission": "",
+  "heroLogo": "assets/img/thunder-mascot.png",
+  "footerLogo": "assets/img/westlake-thunder-wordmark.png",
+  "announcement": {
+   "on": false,
+   "text": "",
+   "linkLabel": "",
+   "linkUrl": "",
+   "until": ""
+  },
+  "teams": [
+   {
+    "id": "seniors",
+    "label": "Seniors",
+    "color": "#E03A3E"
+   },
+   {
+    "id": "juniors",
+    "label": "Juniors",
+    "color": "#2F7BE0"
+   },
+   {
+    "id": "sophomores",
+    "label": "Sophomores",
+    "color": "#2DB45D"
+   },
+   {
+    "id": "teachers",
+    "label": "Teachers",
+    "color": "#F5C518"
+   }
+  ],
+  "join": {
+   "on": true,
+   "title": "Want to join student government?",
+   "text": "More info on how to join comes out around February, before campaign season.",
+   "contactId": "desi-sedgwick"
+  },
+  "ideasTitle": "",
+  "ideasIntro": ""
+ },
+ "home": {
+  "pastPhotos": [],
+  "showScores": true
+ },
+ "audiences": [
+  {
+   "id": "students",
+   "label": "All students"
+  },
+  {
+   "id": "seniors",
+   "label": "Seniors"
+  },
+  {
+   "id": "juniors",
+   "label": "Juniors"
+  },
+  {
+   "id": "sophomores",
+   "label": "Sophomores"
+  },
+  {
+   "id": "families",
+   "label": "Parents and families"
+  },
+  {
+   "id": "community",
+   "label": "Whole community"
+  },
+  {
+   "id": "parents",
+   "label": "Parents only"
+  },
+  {
+   "id": "staff",
+   "label": "Faculty and staff"
+  }
+ ],
+ "people": [
+  {
+   "id": "desi-sedgwick",
+   "name": "Desi Sedgwick",
+   "kind": "adviser",
+   "title": "Advisor",
+   "duties": "",
+   "bio": "Desi is our fearless leader! Desi has been a teacher in the social studies department for the last 6 years and loves teaching history. She is a mom of 4 and a die hard Utah fan. In her free time she enjoys traveling with her husband!",
+   "photo": "assets/uploads/2026/headshots/desi-sedgwick.jpg",
+   "email": "dsedgwick@alpinedistrict.org",
+   "instagram": ""
+  },
+  {
+   "id": "jaylee-robinson",
+   "name": "Jaylee Robinson",
+   "kind": "adviser",
+   "title": "Advisor",
+   "duties": "",
+   "bio": "Jaylee just works here. She has been a teacher in the Social Studies Department since 2024 and is proud to be a Westlochen! At school Jaylee enjoys talking about the government and yelling at teens. In her free time Jaylee enjoys being outside, playing sports, reading and hanging out with her husband and bonus baby!",
+   "photo": "assets/uploads/2026/headshots/jaylee-robinson.jpg",
+   "email": "jayleerobinson@alpinedistrict.org",
+   "instagram": ""
+  },
+  {
+   "id": "amber-hajdo",
+   "name": "Amber Hajdo",
+   "kind": "adviser",
+   "title": "Advisor",
+   "duties": "",
+   "bio": "Amber is the glue that holds council together! She's Desi's younger sister. She taught 1st grade for 4 years and has 3 boys. She's been an advisor for student government for 2 years. She loves to spend time with her family and travel.",
+   "photo": "assets/uploads/2026/headshots/amber-hajdo.jpg",
+   "email": "amberhajdo@alpinedistrict.org",
+   "instagram": ""
+  },
+  {
+   "id": "emma-hauck",
+   "name": "Emmaline Hauck",
+   "kind": "sbo",
+   "title": "Student Body President",
+   "duties": "Leads student government and oversees the senior, junior and sophomore class officers. Meets with administration about the needs of the student body and helps every committee with planning.",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/emma-hauck.jpg",
+   "email": "emmahauck2@gmail.com",
+   "instagram": ""
+  },
+  {
+   "id": "audrey-duckworth",
+   "name": "Audrey Duckworth",
+   "kind": "sbo",
+   "title": "Vice President",
+   "duties": "Oversees the Assemblies Committee and helps plan every assembly student government runs, including the spirit bowls.",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/audrey-duckworth.jpg",
+   "email": "duckwaud000@alpinesd.org",
+   "instagram": ""
+  },
+  {
+   "id": "luke-cowden",
+   "name": "Luke Cowden",
+   "kind": "sbo",
+   "title": "Vice President",
+   "duties": "Oversees the Spirit Committee, which builds school spirit with lunchtime activities, tailgates and the Homecoming Carnival.",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/luke-cowden.jpg",
+   "email": "lukecowden4@gmail.com",
+   "instagram": ""
+  },
+  {
+   "id": "brooklyn-hawkes",
+   "name": "Brooklyn Hawkes",
+   "kind": "sbo",
+   "title": "Vice President",
+   "duties": "Oversees Arketing, the art and marketing team behind the posters, decorations, social media and announcements.",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/brooklyn-hawkes.jpg",
+   "email": "brooklyn.hawkes.03@gmail.com",
+   "instagram": ""
+  },
+  {
+   "id": "grant-jenson",
+   "name": "Grant Jenson",
+   "kind": "sbo",
+   "title": "Vice President",
+   "duties": "Oversees the Activities Committee, which plans activities for the whole student body, like spirit week and tailgates.",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/grant-jenson.jpg",
+   "email": "grantjenson1@gmail.com",
+   "instagram": ""
+  },
+  {
+   "id": "logan-sorenson",
+   "name": "Logan Sorenson",
+   "kind": "sbo",
+   "title": "Vice President",
+   "duties": "Oversees the Service Committee, which plans service projects, community outreach, multicultural events and Stuff the Jar Night.",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/logan-sorenson.jpg",
+   "email": "logansorenson@gmail.com",
+   "instagram": ""
+  },
+  {
+   "id": "julia-mundy",
+   "name": "Julia Mundy",
+   "kind": "student",
+   "title": "Class President",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/julia-mundy.jpg",
+   "email": "mundyjul000@alpinesd.org",
+   "instagram": ""
+  },
+  {
+   "id": "avery-wyner",
+   "name": "Avery Wyner",
+   "kind": "student",
+   "title": "Vice President",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/avery-wyner.jpg",
+   "email": "wynerave000@alpinesd.org",
+   "instagram": ""
+  },
+  {
+   "id": "kaia-williamson",
+   "name": "Kaia Williamson",
+   "kind": "student",
+   "title": "Vice President",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/kaia-williamson.jpg",
+   "email": "willikai010@alpinesd.org",
+   "instagram": ""
+  },
+  {
+   "id": "porter-anderson",
+   "name": "Porter Anderson",
+   "kind": "student",
+   "title": "Class President",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/porter-anderson.jpg",
+   "email": "anderpor001@alpinesd.org",
+   "instagram": ""
+  },
+  {
+   "id": "lauren-fowler",
+   "name": "Lauren Fowler",
+   "kind": "student",
+   "title": "Vice President",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/lauren-fowler.jpg",
+   "email": "fowlelau002@alpinesd.org",
+   "instagram": ""
+  },
+  {
+   "id": "will-larkins",
+   "name": "Will Larkins",
+   "kind": "student",
+   "title": "Vice President",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/will-larkins.jpg",
+   "email": "wlarkins79@gmail.com",
+   "instagram": ""
+  },
+  {
+   "id": "nixon-jones",
+   "name": "Nixon Jones",
+   "kind": "student",
+   "title": "Class President",
+   "duties": "",
+   "bio": "",
+   "photo": "",
+   "email": "jonesnix002@alpinesd.org",
+   "instagram": ""
+  },
+  {
+   "id": "london-okamoto",
+   "name": "London Okamoto",
+   "kind": "student",
+   "title": "Vice President",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/london-okamoto.jpg",
+   "email": "okamolon000@alpinesd.org",
+   "instagram": ""
+  },
+  {
+   "id": "mayzie-robbins",
+   "name": "Mayzie Robbins",
+   "kind": "student",
+   "title": "Vice President",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/mayzie-robbins.jpg",
+   "email": "robbimay000@alpinesd.org",
+   "instagram": ""
+  },
+  {
+   "id": "emry-erickson",
+   "name": "Emry Erickson",
+   "kind": "student",
+   "title": "Chair",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/emry-erickson.jpg",
+   "email": "emry.erickson@gmail.com",
+   "instagram": ""
+  },
+  {
+   "id": "sadie-dyal",
+   "name": "Sadie Dyal",
+   "kind": "student",
+   "title": "Member",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/sadie-dyal.jpg",
+   "email": "sadiedyal@gmail.com",
+   "instagram": ""
+  },
+  {
+   "id": "belle-cochran",
+   "name": "Belle Cochran",
+   "kind": "student",
+   "title": "Member",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/belle-cochran.jpg",
+   "email": "cochrchl000@alpinesd.org",
+   "instagram": ""
+  },
+  {
+   "id": "gracy-de-jong",
+   "name": "Gracy De Jong",
+   "kind": "student",
+   "title": "Member",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/gracy-de-jong.jpg",
+   "email": "graciefaye10@gmail.com",
+   "instagram": ""
+  },
+  {
+   "id": "claire-hinkson",
+   "name": "Claire Hinkson",
+   "kind": "student",
+   "title": "Chair",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/claire-hinkson.jpg",
+   "email": "hinkscla000@alpinesd.org",
+   "instagram": ""
+  },
+  {
+   "id": "brynlee-coles",
+   "name": "Brynlee Coles",
+   "kind": "student",
+   "title": "Member",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/brynlee-coles.jpg",
+   "email": "colesbry000@alpinesd.org",
+   "instagram": ""
+  },
+  {
+   "id": "ethan-mckenna",
+   "name": "Ethan McKenna",
+   "kind": "student",
+   "title": "Member",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/ethan-mckenna.jpg",
+   "email": "mckeneth001@alpinesd.org",
+   "instagram": ""
+  },
+  {
+   "id": "sam-sandgren",
+   "name": "Sam Sandgren",
+   "kind": "student",
+   "title": "Member",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/sam-sandgren.jpg",
+   "email": "sandgsam000@alpinesd.org",
+   "instagram": ""
+  },
+  {
+   "id": "kenzie-sorenson",
+   "name": "Kenzie Sorenson",
+   "kind": "student",
+   "title": "Member",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/kenzie-sorenson.jpg",
+   "email": "sorenmck005@alpinesd.org",
+   "instagram": ""
+  },
+  {
+   "id": "kate-stout",
+   "name": "Kate Stout",
+   "kind": "student",
+   "title": "Member",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/kate-stout.jpg",
+   "email": "katelyn.stout13@gmail.com",
+   "instagram": ""
+  },
+  {
+   "id": "charlotte-wolff",
+   "name": "Charlotte Wolff",
+   "kind": "student",
+   "title": "Member",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/charlotte-wolff.jpg",
+   "email": "charlottewolff2009@gmail.com",
+   "instagram": ""
+  },
+  {
+   "id": "max-jordan",
+   "name": "Max Jordan",
+   "kind": "student",
+   "title": "Chair",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/max-jordan.jpg",
+   "email": "maxbjordan08@gmail.com",
+   "instagram": ""
+  },
+  {
+   "id": "mara-barnes",
+   "name": "Mara Barnes",
+   "kind": "student",
+   "title": "Member",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/mara-barnes.jpg",
+   "email": "barnemar020@alpinesd.org",
+   "instagram": ""
+  },
+  {
+   "id": "keelie-denhalter",
+   "name": "Keelie Denhalter",
+   "kind": "student",
+   "title": "Member",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/keelie-denhalter.jpg",
+   "email": "denhakee000@alpinesd.org",
+   "instagram": ""
+  },
+  {
+   "id": "mia-smoot",
+   "name": "Mia Smoot",
+   "kind": "student",
+   "title": "Member",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/mia-smoot.jpg",
+   "email": "smootmia000@alpinesd.org",
+   "instagram": ""
+  },
+  {
+   "id": "anna-swensen",
+   "name": "Anna Swensen",
+   "kind": "student",
+   "title": "Chair",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/anna-swensen.jpg",
+   "email": "annabswensen@gmail.com",
+   "instagram": ""
+  },
+  {
+   "id": "jo-ansah-antwi",
+   "name": "Jo Ansah-Antwi",
+   "kind": "student",
+   "title": "Member",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/jo-ansah-antwi.jpg",
+   "email": "ansahjoh000@alpinesd.org",
+   "instagram": ""
+  },
+  {
+   "id": "rowan-staples",
+   "name": "Rowan Staples",
+   "kind": "student",
+   "title": "Member",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/rowan-staples.jpg",
+   "email": "staplrow000@alpinesd.org",
+   "instagram": ""
+  },
+  {
+   "id": "skylee-thornton",
+   "name": "Skylee Thornton",
+   "kind": "student",
+   "title": "Member",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/skylee-thornton.jpg",
+   "email": "thornsky000@gmail.com",
+   "instagram": ""
+  },
+  {
+   "id": "claire-stoddard",
+   "name": "Claire Stoddard",
+   "kind": "student",
+   "title": "Chair",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/claire-stoddard.jpg",
+   "email": "claireastoddard@gmail.com",
+   "instagram": ""
+  },
+  {
+   "id": "evelyn-dekker",
+   "name": "Evelyn Dekker",
+   "kind": "student",
+   "title": "Member",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/evelyn-dekker.jpg",
+   "email": "dekkeeve000@alpinesd.org",
+   "instagram": ""
+  },
+  {
+   "id": "grace-forsyth",
+   "name": "Grace Forsyth",
+   "kind": "student",
+   "title": "Member",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/grace-forsyth.jpg",
+   "email": "forsygra000@alpinesd.org",
+   "instagram": ""
+  },
+  {
+   "id": "owen-jordan",
+   "name": "Owen Jordan",
+   "kind": "student",
+   "title": "Member",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/owen-jordan.jpg",
+   "email": "owentjordan10@gmail.com",
+   "instagram": ""
+  },
+  {
+   "id": "lizzy-king",
+   "name": "Lizzy King",
+   "kind": "student",
+   "title": "Member",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/lizzy-king.jpg",
+   "email": "lizzyking865@gmail.com",
+   "instagram": ""
+  },
+  {
+   "id": "emily-moffat",
+   "name": "Emily Moffat",
+   "kind": "student",
+   "title": "Member",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/emily-moffat.jpg",
+   "email": "emilymoffat03@gmail.com",
+   "instagram": ""
+  },
+  {
+   "id": "victoria-pead",
+   "name": "Victoria Pead",
+   "kind": "student",
+   "title": "Member",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/victoria-pead.jpg",
+   "email": "peadvic000@alpinesd.org",
+   "instagram": ""
+  },
+  {
+   "id": "emmalee-pitcher",
+   "name": "Emmalee Pitcher",
+   "kind": "student",
+   "title": "Member",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/emmalee-pitcher.jpg",
+   "email": "empitcher6@gmail.com",
+   "instagram": ""
+  },
+  {
+   "id": "owen-snow",
+   "name": "Owen Snow",
+   "kind": "student",
+   "title": "Member",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/owen-snow.jpg",
+   "email": "owensnw3@gmail.com",
+   "instagram": ""
+  },
+  {
+   "id": "adelaide-wasden",
+   "name": "Adelaide Wasden",
+   "kind": "student",
+   "title": "Member",
+   "duties": "",
+   "bio": "",
+   "photo": "assets/uploads/2026/headshots/adelaide-wasden.jpg",
+   "email": "wasdeade000@alpinesd.org",
+   "instagram": ""
+  }
+ ],
+ "committees": [
+  {
+   "id": "senior",
+   "slug": "senior",
+   "name": "Senior Class",
+   "type": "class",
+   "tagline": "Making senior year one to remember.",
+   "description": "The senior class officers represent the Senior class of Westlake and plan memorable events for seniors all year.\n\nThey design and sell the senior shirt, plan senior activities, help plan Homecoming with the other class officers, work with the SBOs on Senior Ball, and speak at graduation.",
+   "photo": "assets/uploads/2026/groups/senior-main.jpg",
+   "sboId": "emma-hauck",
+   "chairId": "julia-mundy",
+   "memberIds": [
+    "julia-mundy",
+    "avery-wyner",
+    "kaia-williamson"
+   ],
+   "highlights": [
+    {
+     "id": "homecoming",
+     "title": "Homecoming",
+     "summary": "",
+     "photo": "",
+     "years": [],
+     "alsoOn": [
+      "junior",
+      "sophomore"
+     ]
+    },
+    {
+     "id": "senior-ball",
+     "title": "Senior Ball",
+     "summary": "Planned with the SBOs.",
+     "photo": "",
+     "years": [],
+     "alsoOn": []
+    },
+    {
+     "id": "senior-week",
+     "title": "Senior Week",
+     "summary": "A week of activities just for seniors.",
+     "photo": "",
+     "alsoOn": [],
+     "years": []
+    }
+   ],
+   "scoreboard": {
+    "enabled": false,
+    "title": "",
+    "intro": "",
+    "bowls": []
+   },
+   "theme": "Leave a Legacy",
+   "groupPhoto": "assets/uploads/2026/groups/senior-group.jpg"
+  },
+  {
+   "id": "junior",
+   "slug": "junior",
+   "name": "Junior Class",
+   "type": "class",
+   "tagline": "Representing the junior class and planning prom.",
+   "description": "The junior class officers represent the Junior class of Westlake and plan events for juniors throughout the year.\n\nThey plan prom, help plan Homecoming with the other class officers, and make sure their assigned clubs are taken care of.",
+   "photo": "assets/uploads/2026/groups/junior-main.jpg",
+   "sboId": "emma-hauck",
+   "chairId": "porter-anderson",
+   "memberIds": [
+    "porter-anderson",
+    "lauren-fowler",
+    "will-larkins"
+   ],
+   "highlights": [
+    {
+     "id": "prom",
+     "title": "Prom",
+     "summary": "The junior class plans prom every year.",
+     "photo": "",
+     "years": [],
+     "alsoOn": []
+    },
+    {
+     "id": "junior-week",
+     "title": "Junior Week",
+     "summary": "A week of activities just for juniors.",
+     "photo": "",
+     "alsoOn": [],
+     "years": []
+    }
+   ],
+   "scoreboard": {
+    "enabled": false,
+    "title": "",
+    "intro": "",
+    "bowls": []
+   },
+   "theme": "",
+   "groupPhoto": "assets/uploads/2026/groups/junior-group.jpg"
+  },
+  {
+   "id": "sophomore",
+   "slug": "sophomore",
+   "name": "Sophomore Class",
+   "type": "class",
+   "tagline": "Representing the sophomore class and planning Sophomore Week.",
+   "description": "The sophomore class officers represent the Sophomore class of Westlake and plan events for sophomores throughout the year.\n\nThey plan Sophomore Week and other sophomore activities, and help plan Homecoming with the other class officers.",
+   "photo": "assets/uploads/2026/groups/sophomore-main.jpg",
+   "sboId": "emma-hauck",
+   "chairId": "nixon-jones",
+   "memberIds": [
+    "nixon-jones",
+    "london-okamoto",
+    "mayzie-robbins"
+   ],
+   "highlights": [
+    {
+     "id": "sophomore-week",
+     "title": "Sophomore Week",
+     "summary": "A week of activities just for sophomores.",
+     "photo": "",
+     "years": [],
+     "alsoOn": []
+    }
+   ],
+   "scoreboard": {
+    "enabled": false,
+    "title": "",
+    "intro": "",
+    "bowls": []
+   },
+   "theme": "",
+   "groupPhoto": "assets/uploads/2026/groups/sophomore-group.jpg"
+  },
+  {
+   "id": "assemblies",
+   "slug": "assemblies",
+   "name": "Assemblies Committee",
+   "type": "committee",
+   "tagline": "Every assembly student government runs, from script to spirit bowl.",
+   "description": "The Assemblies Committee plans each assembly student government runs throughout the year.\n\nThey write the scripts, come up with the games, and keep things running when the pressure is on, including both spirit bowls.",
+   "photo": "assets/uploads/2026/groups/assemblies-main.jpg",
+   "sboId": "audrey-duckworth",
+   "chairId": "emry-erickson",
+   "memberIds": [
+    "emry-erickson",
+    "sadie-dyal",
+    "belle-cochran",
+    "gracy-de-jong"
+   ],
+   "highlights": [
+    {
+     "id": "assemblies",
+     "title": "Assemblies",
+     "summary": "Every assembly student government runs during the year.",
+     "photo": "",
+     "years": [],
+     "alsoOn": []
+    }
+   ],
+   "scoreboard": {
+    "enabled": true,
+    "title": "Spirit Bowls",
+    "intro": "Classes earn points at spirit bowls all year, plus smaller points at other assemblies like the Christmas Jars and Cultural assemblies. Points add up all year.",
+    "bowls": [
+     {
+      "id": "bowl1",
+      "name": "Spirit Bowl 1",
+      "date": "",
+      "description": "",
+      "scores": {
+       "seniors": 800,
+       "juniors": 650,
+       "sophomores": 450,
+       "teachers": 750
+      },
+      "photos": []
+     },
+     {
+      "id": "cj-assembly",
+      "name": "Christmas Jars Assembly",
+      "date": "2026-11-24",
+      "description": "Smaller class points up for grabs.",
+      "scores": {},
+      "photos": []
+     },
+     {
+      "id": "cultural-assembly",
+      "name": "Cultural Assembly",
+      "date": "2027-03-05",
+      "description": "Smaller class points up for grabs.",
+      "scores": {},
+      "photos": []
+     },
+     {
+      "id": "final-bowl",
+      "name": "Final Spirit Bowl",
+      "date": "",
+      "description": "This spring. Date coming soon.",
+      "scores": {},
+      "photos": []
+     }
+    ]
+   },
+   "theme": "",
+   "groupPhoto": "assets/uploads/2026/groups/assemblies-group.jpg"
+  },
+  {
+   "id": "service",
+   "slug": "service",
+   "name": "Service Committee",
+   "type": "committee",
+   "tagline": "Bringing service opportunities to the student body.",
+   "description": "The Service Committee brings service opportunities to Westlake students.\n\nThey plan service activities at school, community outreach and multicultural events throughout the year, and work with FCCLA to plan Stuff the Jar Night for Christmas Jars.",
+   "photo": "assets/uploads/2026/groups/service-main.jpg",
+   "sboId": "logan-sorenson",
+   "chairId": "claire-hinkson",
+   "memberIds": [
+    "claire-hinkson",
+    "brynlee-coles",
+    "ethan-mckenna",
+    "sam-sandgren",
+    "kenzie-sorenson",
+    "kate-stout",
+    "charlotte-wolff"
+   ],
+   "highlights": [
+    {
+     "id": "stuff-the-jar",
+     "title": "Stuff the Jars Night",
+     "summary": "Part of Christmas Jars, planned with FCCLA.",
+     "photo": "",
+     "years": [],
+     "alsoOn": []
+    }
+   ],
+   "scoreboard": {
+    "enabled": false,
+    "title": "",
+    "intro": "",
+    "bowls": []
+   },
+   "theme": "",
+   "groupPhoto": "assets/uploads/2026/groups/service-group.jpg"
+  },
+  {
+   "id": "spirit",
+   "slug": "spirit",
+   "name": "Spirit Committee",
+   "type": "committee",
+   "tagline": "Making students excited to be at Westlake.",
+   "description": "The Spirit Committee makes students feel excited to be at Westlake.\n\nThey build school spirit with meaningful lunchtime activities (MLTAs), tailgates for games and performances, and the Homecoming Carnival, planned with Sources of Strength and City Squad.",
+   "photo": "assets/uploads/2026/groups/spirit-main.jpg",
+   "sboId": "luke-cowden",
+   "chairId": "max-jordan",
+   "memberIds": [
+    "max-jordan",
+    "mara-barnes",
+    "keelie-denhalter",
+    "mia-smoot"
+   ],
+   "highlights": [
+    {
+     "id": "homecoming-carnival",
+     "title": "Homecoming Carnival",
+     "summary": "",
+     "photo": "",
+     "years": [],
+     "alsoOn": []
+    }
+   ],
+   "scoreboard": {
+    "enabled": false,
+    "title": "",
+    "intro": "",
+    "bowls": []
+   },
+   "theme": "",
+   "groupPhoto": "assets/uploads/2026/groups/spirit-group.jpg"
+  },
+  {
+   "id": "activities",
+   "slug": "activities",
+   "name": "Activities Committee",
+   "type": "committee",
+   "tagline": "Activities that bring the whole student body together.",
+   "description": "The Activities Committee plans activities for the entire student body.\n\nThink spirit week, clown car and tailgates: creative ideas that bring Westlake together.",
+   "photo": "assets/uploads/2026/groups/activities-main.jpg",
+   "sboId": "grant-jenson",
+   "chairId": "anna-swensen",
+   "memberIds": [
+    "anna-swensen",
+    "jo-ansah-antwi",
+    "rowan-staples",
+    "skylee-thornton"
+   ],
+   "highlights": [
+    {
+     "id": "spiritweek",
+     "title": "Spirit Week",
+     "summary": "A week of dress-up days, games and school spirit.",
+     "photo": "",
+     "years": [],
+     "alsoOn": []
+    }
+   ],
+   "scoreboard": {
+    "enabled": false,
+    "title": "",
+    "intro": "",
+    "bowls": []
+   },
+   "theme": "",
+   "groupPhoto": "assets/uploads/2026/groups/activities-group.jpg"
+  },
+  {
+   "id": "arketing",
+   "slug": "arketing",
+   "name": "Arketing",
+   "type": "committee",
+   "tagline": "The art and marketing team behind every poster, post and announcement.",
+   "description": "Arketing is student government's art and marketing team.\n\nThe artists design posters and decorations for dances, the spirit bowls and the commons at Christmas. The marketing side runs the student government Instagram and TikTok, makes digital flyers and videos with Thundervision, and gives the morning announcements.",
+   "photo": "assets/uploads/2026/groups/arketing-main.jpg",
+   "sboId": "brooklyn-hawkes",
+   "chairId": "claire-stoddard",
+   "memberIds": [
+    "claire-stoddard",
+    "evelyn-dekker",
+    "grace-forsyth",
+    "owen-jordan",
+    "lizzy-king",
+    "emily-moffat",
+    "victoria-pead",
+    "emmalee-pitcher",
+    "owen-snow",
+    "adelaide-wasden"
+   ],
+   "highlights": [],
+   "scoreboard": {
+    "enabled": false,
+    "title": "",
+    "intro": "",
+    "bowls": []
+   },
+   "theme": "",
+   "groupPhoto": "assets/uploads/2026/groups/arketing-group.jpg"
+  }
+ ],
+ "events": [
+  {
+   "id": "son-of-thor",
+   "title": "Son of Thor",
+   "start": "2026-11-16T19:00",
+   "end": "2026-11-16T21:00",
+   "location": "Westlake High School, main gym",
+   "description": "A comedy “beauty pageant” where guys from clubs across the school compete in talent, pickup lines and more. You vote by donating to Christmas Jars. Family-friendly and a lot of fun.",
+   "audiences": [
+    "community"
+   ],
+   "committee": "service",
+   "ours": true,
+   "featured": false,
+   "photo": "",
+   "photos": [],
+   "link": "",
+   "linkLabel": "",
+   "cost": "",
+   "dressCode": "",
+   "series": "christmas-jars",
+   "timeNote": "",
+   "moreDates": [],
+   "days": [],
+   "done": false
+  },
+  {
+   "id": "gold-rush",
+   "title": "Gold Rush",
+   "start": "2026-11-23T18:00",
+   "end": "2026-11-23T20:00",
+   "location": "Neighborhoods around Saratoga Springs",
+   "description": "Student volunteers go door to door collecting donations for Christmas Jars. If someone knocks, that’s us. Any student who wants to help can join.",
+   "audiences": [
+    "community"
+   ],
+   "committee": "service",
+   "ours": true,
+   "featured": false,
+   "photo": "",
+   "photos": [],
+   "link": "https://www.successfund.com/7pq2g",
+   "linkLabel": "Donate",
+   "cost": "Give what you like",
+   "dressCode": "",
+   "series": "christmas-jars",
+   "timeNote": "",
+   "moreDates": [
+    {
+     "date": "2026-11-30"
+    },
+    {
+     "date": "2026-12-07"
+    },
+    {
+     "date": "2026-12-14"
+    }
+   ],
+   "days": [],
+   "done": false
+  },
+  {
+   "id": "cj-assembly",
+   "title": "Christmas Jars Assembly",
+   "start": "2026-11-24",
+   "end": "",
+   "location": "Westlake High School, main gym",
+   "description": "A loud, high-energy assembly with games, performances, a raffle and plenty of ways to give. Classes also earn points for the class standings.",
+   "audiences": [
+    "students"
+   ],
+   "committee": "assemblies",
+   "ours": true,
+   "featured": true,
+   "photo": "assets/uploads/2026/christmas-jars/assembly.jpg",
+   "photos": [],
+   "link": "https://www.successfund.com/7pq2g",
+   "linkLabel": "Donate",
+   "cost": "Pay what you can",
+   "dressCode": "",
+   "series": "christmas-jars",
+   "timeNote": "After 2nd period",
+   "moreDates": [],
+   "days": [],
+   "done": false
+  },
+  {
+   "id": "thunder-trials",
+   "title": "Thunder Trials",
+   "start": "2026-11-30",
+   "end": "2026-12-11",
+   "location": "Westlake Commons",
+   "description": "Lunchtime activities in the Commons every school day, with all proceeds going to Christmas Jars.",
+   "audiences": [
+    "students"
+   ],
+   "committee": "service",
+   "ours": true,
+   "featured": false,
+   "photo": "",
+   "photos": [],
+   "link": "https://www.successfund.com/7pq2g",
+   "linkLabel": "Donate",
+   "cost": "",
+   "dressCode": "",
+   "series": "christmas-jars",
+   "timeNote": "Lunch, every school day",
+   "moreDates": [],
+   "days": [
+    {
+     "id": "d0",
+     "date": "2026-11-30",
+     "title": "",
+     "description": ""
+    },
+    {
+     "id": "d1",
+     "date": "2026-12-01",
+     "title": "",
+     "description": ""
+    },
+    {
+     "id": "d2",
+     "date": "2026-12-02",
+     "title": "",
+     "description": ""
+    },
+    {
+     "id": "d3",
+     "date": "2026-12-03",
+     "title": "",
+     "description": ""
+    },
+    {
+     "id": "d4",
+     "date": "2026-12-04",
+     "title": "",
+     "description": ""
+    },
+    {
+     "id": "d5",
+     "date": "2026-12-07",
+     "title": "",
+     "description": ""
+    },
+    {
+     "id": "d6",
+     "date": "2026-12-08",
+     "title": "",
+     "description": ""
+    },
+    {
+     "id": "d7",
+     "date": "2026-12-09",
+     "title": "",
+     "description": ""
+    },
+    {
+     "id": "d8",
+     "date": "2026-12-10",
+     "title": "",
+     "description": ""
+    },
+    {
+     "id": "d9",
+     "date": "2026-12-11",
+     "title": "",
+     "description": ""
+    }
+   ],
+   "done": false
+  },
+  {
+   "id": "muffin-man",
+   "title": "Muffin Man",
+   "start": "2026-12-01",
+   "end": "",
+   "location": "Classrooms across campus",
+   "description": "Students and teachers knock on classroom doors selling muffins. Every dollar goes to Christmas Jars.",
+   "audiences": [
+    "students"
+   ],
+   "committee": "service",
+   "ours": true,
+   "featured": false,
+   "photo": "",
+   "photos": [],
+   "link": "",
+   "linkLabel": "",
+   "cost": "$2 per muffin",
+   "dressCode": "",
+   "series": "christmas-jars",
+   "timeNote": "2nd period",
+   "moreDates": [
+    {
+     "date": "2026-12-03"
+    },
+    {
+     "date": "2026-12-08"
+    },
+    {
+     "date": "2026-12-10"
+    },
+    {
+     "date": "2026-12-15"
+    },
+    {
+     "date": "2026-12-17"
+    }
+   ],
+   "days": [],
+   "done": false
+  },
+  {
+   "id": "stuff-the-jars",
+   "title": "Stuff the Jars Night",
+   "start": "2026-12-10T17:30",
+   "end": "2026-12-10T20:00",
+   "location": "Westlake High School",
+   "description": "Our biggest night of the Christmas Jars season. More details are coming soon.",
+   "audiences": [
+    "community"
+   ],
+   "committee": "service",
+   "ours": true,
+   "featured": true,
+   "photo": "",
+   "photos": [],
+   "link": "https://www.successfund.com/7pq2g",
+   "linkLabel": "Donate",
+   "cost": "",
+   "dressCode": "",
+   "series": "christmas-jars",
+   "timeNote": "",
+   "moreDates": [],
+   "days": [],
+   "done": false
+  },
+  {
+   "id": "spirit-week",
+   "title": "Spirit Week",
+   "start": "2026-12-14",
+   "end": "2026-12-17",
+   "location": "Westlake High School",
+   "description": "A week of dress-up days, games and school spirit right before winter break.",
+   "audiences": [
+    "students"
+   ],
+   "committee": "activities",
+   "ours": true,
+   "featured": true,
+   "photo": "",
+   "photos": [],
+   "link": "",
+   "linkLabel": "",
+   "cost": "",
+   "dressCode": "",
+   "series": "spiritweek",
+   "timeNote": "",
+   "moreDates": [],
+   "days": [
+    {
+     "id": "d0",
+     "date": "2026-12-14",
+     "title": "",
+     "description": ""
+    },
+    {
+     "id": "d1",
+     "date": "2026-12-15",
+     "title": "",
+     "description": ""
+    },
+    {
+     "id": "d2",
+     "date": "2026-12-16",
+     "title": "",
+     "description": ""
+    },
+    {
+     "id": "d3",
+     "date": "2026-12-17",
+     "title": "",
+     "description": ""
+    }
+   ],
+   "done": false
+  },
+  {
+   "id": "senior-ball",
+   "title": "Senior Ball",
+   "start": "2027-01-23",
+   "end": "",
+   "location": "",
+   "description": "Details coming soon.",
+   "audiences": [
+    "seniors"
+   ],
+   "committee": "senior",
+   "ours": true,
+   "featured": false,
+   "photo": "",
+   "photos": [],
+   "link": "",
+   "linkLabel": "",
+   "cost": "",
+   "dressCode": "",
+   "series": "senior-ball",
+   "timeNote": "",
+   "moreDates": [],
+   "days": [],
+   "done": false
+  },
+  {
+   "id": "sophomore-week",
+   "title": "Sophomore Week",
+   "start": "2027-02-01",
+   "end": "2027-02-05",
+   "location": "",
+   "description": "A week of activities just for sophomores.",
+   "audiences": [
+    "sophomores"
+   ],
+   "committee": "sophomore",
+   "ours": true,
+   "featured": false,
+   "photo": "",
+   "photos": [],
+   "link": "",
+   "linkLabel": "",
+   "cost": "",
+   "dressCode": "",
+   "series": "sophomore-week",
+   "timeNote": "",
+   "moreDates": [],
+   "days": [
+    {
+     "id": "d0",
+     "date": "2027-02-01",
+     "title": "",
+     "description": ""
+    },
+    {
+     "id": "d1",
+     "date": "2027-02-02",
+     "title": "",
+     "description": ""
+    },
+    {
+     "id": "d2",
+     "date": "2027-02-03",
+     "title": "",
+     "description": ""
+    },
+    {
+     "id": "d3",
+     "date": "2027-02-04",
+     "title": "",
+     "description": ""
+    },
+    {
+     "id": "d4",
+     "date": "2027-02-05",
+     "title": "",
+     "description": ""
+    }
+   ],
+   "done": false
+  },
+  {
+   "id": "senior-week",
+   "title": "Senior Week",
+   "start": "2027-03-01",
+   "end": "2027-03-05",
+   "location": "",
+   "description": "A week of activities just for seniors.",
+   "audiences": [
+    "seniors"
+   ],
+   "committee": "senior",
+   "ours": true,
+   "featured": false,
+   "photo": "",
+   "photos": [],
+   "link": "",
+   "linkLabel": "",
+   "cost": "",
+   "dressCode": "",
+   "series": "senior-week",
+   "timeNote": "",
+   "moreDates": [],
+   "days": [
+    {
+     "id": "d0",
+     "date": "2027-03-01",
+     "title": "",
+     "description": ""
+    },
+    {
+     "id": "d1",
+     "date": "2027-03-02",
+     "title": "",
+     "description": ""
+    },
+    {
+     "id": "d2",
+     "date": "2027-03-03",
+     "title": "",
+     "description": ""
+    },
+    {
+     "id": "d3",
+     "date": "2027-03-04",
+     "title": "",
+     "description": ""
+    },
+    {
+     "id": "d4",
+     "date": "2027-03-05",
+     "title": "",
+     "description": ""
+    }
+   ],
+   "done": false
+  },
+  {
+   "id": "cultural-assembly",
+   "title": "Cultural Assembly",
+   "start": "2027-03-05",
+   "end": "",
+   "location": "Westlake High School, main gym",
+   "description": "Details coming soon. Classes also earn points for the class standings.",
+   "audiences": [
+    "students"
+   ],
+   "committee": "assemblies",
+   "ours": true,
+   "featured": false,
+   "photo": "",
+   "photos": [],
+   "link": "",
+   "linkLabel": "",
+   "cost": "",
+   "dressCode": "",
+   "series": "assemblies",
+   "timeNote": "",
+   "moreDates": [],
+   "days": [],
+   "done": false
+  },
+  {
+   "id": "prom",
+   "title": "Prom",
+   "start": "2027-03-20",
+   "end": "",
+   "location": "Electric Park at Thanksgiving Point",
+   "description": "Theme coming soon.",
+   "audiences": [
+    "juniors",
+    "seniors"
+   ],
+   "committee": "junior",
+   "ours": true,
+   "featured": false,
+   "photo": "",
+   "photos": [],
+   "link": "",
+   "linkLabel": "",
+   "cost": "",
+   "dressCode": "",
+   "series": "prom",
+   "timeNote": "",
+   "moreDates": [],
+   "days": [],
+   "done": false
+  },
+  {
+   "id": "junior-week",
+   "title": "Junior Week",
+   "start": "2027-04-12",
+   "end": "2027-04-16",
+   "location": "",
+   "description": "A week of activities just for juniors.",
+   "audiences": [
+    "juniors"
+   ],
+   "committee": "junior",
+   "ours": true,
+   "featured": false,
+   "photo": "",
+   "photos": [],
+   "link": "",
+   "linkLabel": "",
+   "cost": "",
+   "dressCode": "",
+   "series": "junior-week",
+   "timeNote": "",
+   "moreDates": [],
+   "days": [
+    {
+     "id": "d0",
+     "date": "2027-04-12",
+     "title": "",
+     "description": ""
+    },
+    {
+     "id": "d1",
+     "date": "2027-04-13",
+     "title": "",
+     "description": ""
+    },
+    {
+     "id": "d2",
+     "date": "2027-04-14",
+     "title": "",
+     "description": ""
+    },
+    {
+     "id": "d3",
+     "date": "2027-04-15",
+     "title": "",
+     "description": ""
+    },
+    {
+     "id": "d4",
+     "date": "2027-04-16",
+     "title": "",
+     "description": ""
+    }
+   ],
+   "done": false
+  },
+  {
+   "id": "final-spirit-bowl",
+   "title": "Final Spirit Bowl",
+   "start": "",
+   "end": "",
+   "location": "Westlake High School, main gym",
+   "description": "The last spirit bowl of the year. Which class finishes on top?",
+   "audiences": [
+    "students"
+   ],
+   "committee": "assemblies",
+   "ours": true,
+   "featured": false,
+   "photo": "",
+   "photos": [],
+   "link": "",
+   "linkLabel": "",
+   "cost": "",
+   "dressCode": "",
+   "series": "assemblies",
+   "timeNote": "This spring, date TBD",
+   "moreDates": [],
+   "days": [],
+   "done": false
+  },
+  {
+   "id": "homecoming",
+   "title": "Homecoming",
+   "start": "",
+   "end": "",
+   "location": "",
+   "description": "",
+   "audiences": [],
+   "committee": "senior",
+   "ours": true,
+   "featured": false,
+   "photo": "",
+   "photos": [],
+   "link": "",
+   "linkLabel": "",
+   "cost": "",
+   "dressCode": "",
+   "series": "homecoming",
+   "timeNote": "",
+   "moreDates": [],
+   "days": [],
+   "done": true
+  },
+  {
+   "id": "homecoming-carnival",
+   "title": "Homecoming Carnival",
+   "start": "",
+   "end": "",
+   "location": "",
+   "description": "",
+   "audiences": [],
+   "committee": "spirit",
+   "ours": true,
+   "featured": false,
+   "photo": "",
+   "photos": [],
+   "link": "",
+   "linkLabel": "",
+   "cost": "",
+   "dressCode": "",
+   "series": "homecoming-carnival",
+   "timeNote": "",
+   "moreDates": [],
+   "days": [],
+   "done": true
+  }
+ ],
+ "pages": [
+  {
+   "id": "christmas-jars",
+   "slug": "christmas-jars",
+   "title": "Christmas Jars",
+   "kicker": "Season of Gold",
+   "inMenu": true,
+   "subtitle": "Helping families in Saratoga Springs and Eagle Mountain this Christmas.",
+   "photo": "assets/uploads/2026/christmas-jars/assembly.jpg",
+   "body": "Westlake High School is raising money to support our Saratoga Springs and Eagle Mountain communities. All donations go directly toward helping members of our Westlake community who could use a little extra support this holiday season. Together, we can ease burdens, share kindness, and remind those around us that they are cared for and supported.\n\nEvery donation, big or small, can help make someone's Christmas a little brighter! Christmas Jars runs November 16 through December 17, 2026.",
+   "donateUrl": "https://www.successfund.com/7pq2g",
+   "donateLabel": "Donate now",
+   "showTotal": true,
+   "autoTotal": true,
+   "goal": 10000,
+   "manualRaised": 2926,
+   "years": [
+    {
+     "id": "y2026",
+     "year": "2026",
+     "theme": "",
+     "description": "This year's Christmas Jars campaign runs through December 17.",
+     "photos": []
+    },
+    {
+     "id": "y2025",
+     "year": "2025",
+     "theme": "",
+     "description": "How last year went.",
+     "photos": [
+      {
+       "src": "",
+       "caption": ""
+      },
+      {
+       "src": "",
+       "caption": ""
+      },
+      {
+       "src": "",
+       "caption": ""
+      }
+     ]
+    }
+   ],
+   "homeMode": "months",
+   "homeFrom": "11",
+   "homeTo": "12",
+   "links": [
+    {
+     "label": "Follow @whschristmasjars",
+     "url": "https://www.instagram.com/whschristmasjars/"
+    }
+   ],
+   "faq": [
+    {
+     "q": "Where does the money go?",
+     "a": "All of it goes back to families in Saratoga Springs and Eagle Mountain. Each family receives a check and a copy of the book Christmas Jars."
+    },
+    {
+     "q": "How are families chosen?",
+     "a": "People in our community nominate families they know could use a little help this Christmas."
+    },
+    {
+     "q": "How do I donate?",
+     "a": "Give online with the Donate button, or come to any of the events on this page."
+    },
+    {
+     "q": "What’s the last day to give?",
+     "a": "Donations through December 17 count toward this season. Anything given after that goes to next year’s Christmas Jars."
+    },
+    {
+     "q": "Can my family come to the events?",
+     "a": "Yes. Community events are for everyone in the Westlake area, Saratoga Springs and Eagle Mountain, including kids from local elementary and middle schools. Every event is family-friendly."
+    },
+    {
+     "q": "Who runs Christmas Jars?",
+     "a": "Westlake High School’s Student Government, PTA and FCCLA."
+    },
+    {
+     "q": "Why is it called Christmas Jars?",
+     "a": "It’s named after the book Christmas Jars by Jason F. Wright, about anonymous jars of spare change left for people who need them."
+    }
+   ],
+   "lastDay": "2026-12-17",
+   "bigEventId": "stuff-the-jars",
+   "story": {
+    "title": "It started with one jar",
+    "logo": "assets/img/thor-mighty-thunder.png",
+    "text": "Christmas Jars is named after the book by Jason F. Wright, where jars of spare change show up for people who need them most. Westlake has been passing that idea along ever since.",
+    "steps": [
+     {
+      "label": "The first jar",
+      "text": "FCCLA adviser Candace Wilson received a Christmas Jar of her own. It inspired her and another teacher to hold the school’s first fundraiser at the holiday choir concert, raising $800 for the local Sub for Santa program."
+     },
+     {
+      "label": "2011",
+      "text": "FCCLA put jars in classrooms across the school and raised $2,300."
+     },
+     {
+      "label": "Today",
+      "text": "Student Government, PTA and FCCLA run a whole season of events, from Stuff the Jars Night to door-to-door Gold Rush nights, raising tens of thousands of dollars each year."
+     }
+    ]
+   },
+   "ways": {
+    "on": true,
+    "onlineText": "Any amount helps. It takes about a minute through our secure SuccessFund page.",
+    "eventText": "Buy a treat, vote at Son of Thor, or open the door on a Gold Rush night. It all goes in the jar."
+   }
+  }
+ ]
+}
