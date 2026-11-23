@@ -158,6 +158,35 @@
     WSG.editMode ? `<button class="edit-pin" data-edit="${esc(target)}" type="button">✎ ${esc(label)}</button>` : "";
   const pin = WSG.pin;
 
+  /* ---------------- social icons ---------------- */
+  const ICONS = {
+    instagram: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>`,
+    tiktok: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 2h-3.3v13.2a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9a6.3 6.3 0 1 0 5.3 6.2V8.6a7.6 7.6 0 0 0 4.4 1.4V6.7a4.4 4.4 0 0 1-4.4-4.4z"/></svg>`,
+    youtube: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 8.2a3 3 0 0 0-2.1-2.1C18 5.6 12 5.6 12 5.6s-6 0-7.9.5A3 3 0 0 0 2 8.2 31 31 0 0 0 1.6 12 31 31 0 0 0 2 15.8a3 3 0 0 0 2.1 2.1c1.9.5 7.9.5 7.9.5s6 0 7.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .4-3.8 31 31 0 0 0-.4-3.8zM10 15.2V8.8l5.2 3.2z"/></svg>`,
+    facebook: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8.5V6.8c0-.8.5-1 .9-1h2.4V2.1L14 2c-3.6 0-4.4 2.7-4.4 4.4v2.1H7.4v3.8h2.2V22H14v-9.7h3l.4-3.8z"/></svg>`,
+    x: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.8 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.2-8.3L1.8 3h6.4l4.4 5.8zm-1.1 16.2h1.7L7.4 4.7H5.6z"/></svg>`,
+    email: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg>`,
+    web: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>`,
+  };
+  const iconFor = (url) => {
+    const u = String(url || "").toLowerCase();
+    if (u.includes("instagram.com")) return ICONS.instagram;
+    if (u.includes("tiktok.com")) return ICONS.tiktok;
+    if (u.includes("youtube.com") || u.includes("youtu.be")) return ICONS.youtube;
+    if (u.includes("facebook.com")) return ICONS.facebook;
+    if (u.includes("twitter.com") || u.includes("x.com/")) return ICONS.x;
+    if (u.startsWith("mailto:")) return ICONS.email;
+    return ICONS.web;
+  };
+  // Every social link plus the contact email, as round icon buttons
+  function socialIcons(cls = "") {
+    const s = D().site;
+    const list = (s.socials || []).filter((x) => x.url).map((x) => ({ url: safeUrl(x.url), label: x.label || "Link" }));
+    if (s.contactEmail) list.push({ url: "mailto:" + s.contactEmail, label: "Email us" });
+    if (!list.length) return "";
+    return `<div class="soc ${cls}">${list.map((x) => `<a href="${esc(x.url)}" aria-label="${esc(x.label)}" title="${esc(x.label)}">${iconFor(x.url)}</a>`).join("")}</div>`;
+  }
+
   /* ---------------- nav + footer ---------------- */
   function renderChrome() {
     const s = D().site;
@@ -185,7 +214,7 @@
             ? `<div class="nav-drop"><a href="${h}" data-nav aria-haspopup="true">${t}<span class="caret" aria-hidden="true">▾</span></a><div class="nav-sub"><a class="all" href="${h}">All committees</a>${sub}</div></div>`
             : `<a href="${h}" data-nav>${t}</a>`
         )
-        .join("") + pages.map((p) => `<a href="#/p/${esc(p.slug)}" data-nav>${esc(p.title)}</a>`).join("");
+        .join("") + pages.map((p) => `<a href="#/p/${esc(p.slug)}" data-nav>${esc(p.title)}</a>`).join("") + socialIcons("soc-nav");
 
     renderAnnouncement();
 
@@ -450,6 +479,11 @@
         <div class="hero-sub"><p class="hero-tag">${esc(s.tagline || "")}</p><div class="scroll-cue"><i></i>Scroll</div></div>
       </div>
     </section>
+    ${
+      socialIcons()
+        ? `<div class="soc-bar"><div class="wrap soc-bar-in">${pin("site:contact", "Edit socials")}<span class="soc-label">Follow us</span>${socialIcons("soc-big")}</div></div>`
+        : ""
+    }
 
     ${s.intro ? `<section class="section white"><div class="wrap">${pin("site:intro")}<div class="mission-grid"><div><div class="eyebrow rv">Our mission</div><p class="statement" data-words>${statement}</p></div>${s.heroLogo ? `<div class="mission-logo rv">${img(s.heroLogo, "Westlake Thunder logo")}</div>` : ""}</div>${s.mission ? `<div class="mission rv">${paras(s.mission)}</div>` : ""}</div></section>` : ""}
 
@@ -520,15 +554,6 @@
       )
       .join("")}
 
-    <section class="section"><div class="wrap">
-      <div class="section-head"><div><div class="eyebrow rv">Get involved</div><h2 class="rv">Connect with us</h2></div></div>
-      ${pin("site:contact", "Edit contact info")}
-      <div class="connect">
-        ${socials.map((x) => `<a class="rv" href="${esc(safeUrl(x.url))}"><span class="eyebrow">Follow</span><h3>${esc(x.label)}</h3><span class="muted">${esc(x.url.replace(/^https?:\/\/(www\.)?/, ""))}</span></a>`).join("")}
-        ${s.contactEmail ? `<a class="rv" href="mailto:${esc(s.contactEmail)}"><span class="eyebrow">Email</span><h3>Contact us</h3><span class="muted">${esc(s.contactEmail)}</span></a>` : ""}
-        ${!socials.length && !s.contactEmail ? `<div class="c"><span class="muted">Social links and a contact email will show up here.</span></div>` : ""}
-      </div>
-    </div></section>
     ${joinSection()}
     ${ideasSection()}`;
   }
