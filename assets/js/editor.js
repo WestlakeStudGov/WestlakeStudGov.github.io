@@ -215,9 +215,18 @@
       { k: "intro", t: "textarea", l: "Big mission statement", max: 260, hint: "One or two sentences. Shown big on the home page." },
       { k: "mission", t: "textarea", l: "Full mission statement", hint: "Shown under the big statement on the home page." },
       { k: "contactEmail", t: "email", l: "Contact email" },
-      { k: "suggestionUrl", t: "url", l: "Ideas form (Google Form link)", hint: "Shown at the bottom of the home page and every committee page. In Google Forms, click Send, pick the link tab, and paste the full link (not the shortened one) so the form shows right on the page." },
-      { k: "ideasTitle", t: "text", l: "Ideas section title", max: 70, ph: "What do you want to see student government do?" },
-      { k: "ideasIntro", t: "text", l: "Ideas section line under the title", max: 120, ph: "Tell us. We read every one." },
+      {
+        k: "ideasForm",
+        t: "group",
+        l: "Ideas and questions form",
+        fields: [
+          { k: "on", t: "check", l: "Show the form", hint: "Shows at the bottom of the home page, the Committees page and every committee page." },
+          { k: "title", t: "text", l: "Title", max: 70 },
+          { k: "intro", t: "text", l: "Line under the title", max: 140 },
+          { k: "choices", t: "textarea", l: "\"What is this about?\" choices", hint: "One per line. Must match the Google Form's choices word for word.", max: 200 },
+          { k: "prefill", t: "url", l: "Google Form pre-filled link", hint: "In the Google Form: three dots > Get pre-filled link, fill in every answer, Get link, Copy link. Questions must be in this order: what it's about, message, name, email." },
+        ],
+      },
       { k: "socials", t: "list", l: "Social media links", item: "link", title: (x) => x.label || "New link", fields: [{ k: "label", t: "text", l: "Name (like Instagram)", max: 20 }, { k: "url", t: "url", l: "Link" }], make: () => ({ label: "", url: "" }) },
       {
         k: "join",

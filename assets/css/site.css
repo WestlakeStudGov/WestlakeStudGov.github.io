@@ -680,3 +680,55 @@ body.nav-up .jump,body.nav-up .filters{top:0}
 .ev-more-btn{margin-top:20px}
 .flash{position:fixed;left:50%;bottom:24px;transform:translate(-50%,140%);z-index:150;background:var(--navy);color:var(--white);padding:12px 18px;border-radius:999px;font:600 14px var(--body);box-shadow:0 14px 34px rgba(0,0,0,.3);transition:transform .35s cubic-bezier(.2,.8,.2,1);max-width:calc(100vw - 32px);text-align:center}
 .flash.show{transform:translate(-50%,0)}
+
+/* ---------- Follow us bar: bigger and easier to notice ---------- */
+.soc-bar{position:relative;background:linear-gradient(100deg,var(--navy) 0%,var(--navy-3) 55%,#2F5F95 100%);border-top:0}
+.soc-bar::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-2,#D9CDA2),var(--gold))}
+.soc-bar-in{gap:18px 28px;padding-top:26px;padding-bottom:26px}
+.soc-text{display:flex;flex-direction:column;gap:2px;text-align:left}
+.soc-label{font:800 clamp(22px,2.6vw,30px)/1 var(--display);letter-spacing:.1em;color:var(--gold)}
+.soc-sub{font:500 14px var(--body);color:#C5D3E6}
+.soc-big{gap:12px}
+.soc-big a{width:54px;height:54px;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 2px rgba(197,182,131,.75)}
+.soc-big svg{width:24px;height:24px}
+.soc-big a:hover{background:var(--gold);color:var(--navy);box-shadow:0 10px 24px -8px rgba(197,182,131,.8);transform:translateY(-3px)}
+.soc-big a.soc-ig{animation:socGlow 2.8s ease-in-out infinite}
+@keyframes socGlow{0%,100%{box-shadow:inset 0 0 0 2px rgba(197,182,131,.75),0 0 0 0 rgba(197,182,131,0)}50%{box-shadow:inset 0 0 0 2px var(--gold),0 0 22px 4px rgba(197,182,131,.45)}}
+@media (max-width:560px){.soc-bar-in{flex-direction:column;gap:14px}.soc-text{text-align:center;align-items:center}}
+@media (prefers-reduced-motion:reduce){.soc-big a.soc-ig{animation:none}}
+
+/* ---------- Get involved: ideas form + Want to join? ---------- */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.talk{background:linear-gradient(160deg,var(--carolina) 0%,#93C2EC 100%)}
+.talk-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(16px,2.5vw,28px);align-items:stretch}
+.talk-grid.one{grid-template-columns:minmax(0,760px);justify-content:center}
+.talk-card{position:relative;border-radius:var(--r-lg);padding:clamp(22px,3.2vw,40px);overflow:hidden}
+.talk-card h3{font-size:clamp(32px,3.6vw,50px);line-height:1;margin:6px 0 10px}
+.talk-form-card{background:var(--white);color:var(--navy);box-shadow:0 30px 70px -34px rgba(13,34,63,.55)}
+.talk-form{display:flex;flex-direction:column;gap:14px;margin-top:18px}
+.talk-kinds{border:0;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px}
+.talk-kinds label{cursor:pointer}
+.talk-kinds input{position:absolute;opacity:0;pointer-events:none}
+.talk-kinds span{display:inline-block;border:1.5px solid var(--line);border-radius:999px;padding:8px 16px;font:600 14px var(--body);transition:background .2s,color .2s,border-color .2s}
+.talk-kinds input:checked+span{background:var(--navy);border-color:var(--navy);color:var(--white)}
+.talk-kinds input:focus-visible+span{outline:3px solid var(--carolina);outline-offset:2px}
+.talk-field{display:flex;flex-direction:column;gap:6px;font:600 14px var(--body)}
+.talk-field small{font-weight:400;color:var(--muted)}
+.talk-field textarea,.talk-field input{width:100%;border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;font:16px var(--body);color:var(--navy);background:var(--paper);transition:border-color .2s,background .2s}
+.talk-field textarea{resize:vertical;min-height:120px}
+.talk-field textarea:focus,.talk-field input:focus{outline:none;border-color:var(--carolina);background:var(--white);box-shadow:0 0 0 3px rgba(108,169,226,.25)}
+.talk-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.talk-hp{position:absolute;left:-9999px;width:1px;height:1px}
+.talk-err{color:#B3261E;font-size:14px;margin:0;min-height:0}
+.talk-err:empty{display:none}
+.talk-send{align-self:flex-start}
+.talk-send:disabled{opacity:.6}
+.talk-done{text-align:center;padding:30px 0 10px}
+.talk-check{width:76px;height:76px;border-radius:50%;background:var(--gold);color:var(--navy);display:grid;place-items:center;margin:0 auto 14px}
+.talk-check svg{width:40px;height:40px}
+.talk-join{background:var(--navy);color:var(--white);display:flex;flex-direction:column;gap:10px}
+.talk-join p{color:#C5D3E6;font-size:17px;margin:0}
+.talk-join .join-mark{right:-50px;width:240px}
+.talk-join .join-who{margin-top:auto}
+@media (max-width:900px){.talk-grid{grid-template-columns:1fr}}
+@media (max-width:520px){.talk-row{grid-template-columns:1fr}}

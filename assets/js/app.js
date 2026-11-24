@@ -301,7 +301,7 @@
     const list = (s.socials || []).filter((x) => x.url).map((x) => ({ url: safeUrl(x.url), label: x.label || "Link" }));
     if (s.contactEmail) list.push({ url: "mailto:" + s.contactEmail, label: "Email us" });
     if (!list.length) return "";
-    return `<div class="soc ${cls}">${list.map((x) => `<a href="${esc(x.url)}" aria-label="${esc(x.label)}" title="${esc(x.label)}">${iconFor(x.url)}</a>`).join("")}</div>`;
+    return `<div class="soc ${cls}">${list.map((x) => `<a href="${esc(x.url)}" aria-label="${esc(x.label)}" title="${esc(x.label)}"${/instagram\.com/i.test(x.url) ? ' class="soc-ig"' : ""}>${iconFor(x.url)}</a>`).join("")}</div>`;
   }
 
   /* ---------------- nav + footer ---------------- */
@@ -423,39 +423,70 @@
     if (!m) return "";
     return `https://docs.google.com/forms/d/${m[1] ? "e/" : ""}${m[2]}/viewform?embedded=true`;
   }
-  function joinSection() {
-    const j = D().site.join || {};
-    if (!j.on || !(j.title || j.text)) return WSG.editMode ? `<section class="section"><div class="wrap">${pin("site:join", "Add a \"Want to join?\" section")}</div></section>` : "";
-    const who = person(j.contactId);
-    return `<section class="section join"><div class="wrap join-in">
-      ${pin("site:join", "Edit this section")}
-      <div class="join-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 2 5 14h6l-2 8 10-13h-6z" fill="currentColor"/></svg></div>
-      <div class="join-text"><div class="eyebrow gold rv">Get involved</div><h2 class="rv">${esc(j.title || "Want to join?")}</h2>${j.text ? `<div class="rv">${paras(j.text)}</div>` : ""}</div>
-      ${who ? `<div class="join-who rv"><span class="av">${img(who.photo, who.name, "")}</span><div><small>Questions? Talk to</small><b>${esc(who.name)}</b>${who.email ? `<a class="btn btn-gold" href="mailto:${esc(who.email)}">Email ${esc(who.name.split(" ")[0])} <span class="arr">→</span></a>` : ""}</div></div>` : ""}
-    </div></section>`;
+  /* ---------------- Get involved: ideas form + "Want to join?" ---------------- */
+  // The ideas form is a Google Form filled in behind the scenes, so people never leave the site.
+  // site.ideasForm.prefill holds the form's pre-filled link; its entry numbers are read in order:
+  // 1 = what it's about, 2 = message, 3 = name, 4 = email.
+  function ideasConfig() {
+    const f = D().site.ideasForm || {};
+    const link = String(f.prefill || "");
+    const m = link.match(/^https:\/\/docs\.google\.com\/forms\/(?:u\/\d+\/)?d\/e\/([\w-]+)\//);
+    const ids = [...link.matchAll(/entry\.(\d+)=/g)].map((x) => "entry." + x[1]);
+    if (!f.on || !m || ids.length < 2) return null;
+    return {
+      action: `https://docs.google.com/forms/d/e/${m[1]}/formResponse`,
+      ids,
+      choices: String(f.choices || "").split("\n").map((x) => x.trim()).filter(Boolean).length
+        ? String(f.choices).split("\n").map((x) => x.trim()).filter(Boolean)
+        : ["An event idea", "A suggestion", "A question"],
+      title: f.title || "What do you want to see student government do?",
+      intro: f.intro || "Share an event idea, a suggestion or a question. It goes straight to student government.",
+    };
   }
-
-  function ideasSection(c) {
-    const s = D().site;
-    const url = s.suggestionUrl;
-    if (!url) return WSG.editMode ? `<section class="section ideas"><div class="wrap">${pin("site:ideas", "Add the ideas form")}</div></section>` : "";
-    const embed = formEmbed(url);
-    const title = s.ideasTitle || "What do you want to see student government do?";
-    const intro = c ? `Got an idea for the ${groupName(c)}${c.type === "class" ? "" : " Committee"}? ${s.ideasIntro || "Tell us. We read every one."}` : s.ideasIntro || "Tell us. We read every one.";
-    return `<section class="section ideas"><div class="wrap ideas-grid">
-      <div class="ideas-text">
-        ${pin("site:ideas", "Edit the ideas form")}
-        <div class="eyebrow gold rv">Have an idea?</div>
-        <h2 class="rv">${esc(title)}</h2>
-        <p class="rv">${esc(intro)}</p>
-        ${embed ? `<a class="ideas-alt rv" href="${esc(safeUrl(url))}">Form not loading? Open it here <span class="arr">→</span></a>` : ""}
-      </div>
-      <div class="ideas-form rv">${
-        embed
-          ? `<iframe src="${esc(embed)}" title="${esc(title)}" loading="lazy">Loading…</iframe>`
-          : `<a class="btn btn-gold ideas-btn" href="${esc(safeUrl(url))}">Share your idea <span class="arr">→</span></a>`
-      }</div>
-    </div></section>`;
+  function ideasCard(c) {
+    const cfg = ideasConfig();
+    if (!cfg) return WSG.editMode ? `<div class="talk-card talk-form-card">${pin("site:ideas", "Set up the ideas form")}<p class="muted">Paste the Google Form's pre-filled link in edit mode (Site & home).</p></div>` : "";
+    const where = c ? c.name : "";
+    return `<div class="talk-card talk-form-card rv">
+      ${pin("site:ideas", "Edit the ideas form")}
+      <div class="eyebrow">Have an idea?</div>
+      <h3>${esc(cfg.title)}</h3>
+      <p class="muted">${esc(cfg.intro)}</p>
+      <form class="talk-form" data-where="${esc(where)}" novalidate>
+        <fieldset class="talk-kinds"><legend class="sr">What is this about?</legend>${cfg.choices
+          .map((ch, i) => `<label><input type="radio" name="kind" value="${esc(ch)}" ${i === 0 ? "checked" : ""}><span>${esc(ch)}</span></label>`)
+          .join("")}</fieldset>
+        <label class="talk-field"><span>Your message</span><textarea name="message" rows="4" maxlength="1500" required placeholder="${c ? `An idea for the ${esc(groupName(c))}…` : "I think it would be awesome if…"}"></textarea></label>
+        <div class="talk-row">
+          <label class="talk-field"><span>Name <small>(optional)</small></span><input name="name" maxlength="80" autocomplete="name"></label>
+          <label class="talk-field"><span>Email <small>(optional, for a reply)</small></span><input name="email" type="email" maxlength="120" autocomplete="email"></label>
+        </div>
+        <input class="talk-hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="talk-err" role="alert"></p>
+        <button class="btn btn-gold talk-send" type="submit">Send <span class="arr">→</span></button>
+      </form>
+      <div class="talk-done" hidden><div class="talk-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Thanks! We got it.</h3><p class="muted">Student government reads every message.</p><button class="btn btn-line talk-again" type="button">Send another</button></div>
+    </div>`;
+  }
+  function joinCard() {
+    const j = D().site.join || {};
+    if (!j.on || !(j.title || j.text)) return WSG.editMode ? `<div class="talk-card talk-join">${pin("site:join", "Add a \"Want to join?\" box")}</div>` : "";
+    const who = person(j.contactId);
+    return `<div class="talk-card talk-join rv">
+      ${pin("site:join", "Edit this box")}
+      <div class="join-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 2 5 14h6l-2 8 10-13h-6z" fill="currentColor"/></svg></div>
+      <div class="eyebrow gold">Get involved</div>
+      <h3>${esc(j.title || "Want to join?")}</h3>
+      ${j.text ? paras(j.text) : ""}
+      ${who ? `<div class="join-who"><span class="av">${img(who.photo, who.name, "")}</span><div><small>Questions? Talk to</small><b>${esc(who.name)}</b>${who.email ? `<a class="btn btn-gold" href="mailto:${esc(who.email)}">Email ${esc(who.name.split(" ")[0])} <span class="arr">→</span></a>` : ""}</div></div>` : ""}
+    </div>`;
+  }
+  // Form first (above on phones), "Want to join?" beside it on computers
+  function talkSection(c) {
+    const a = ideasCard(c),
+      b = joinCard();
+    if (!a && !b) return "";
+    return `<section class="section talk"><div class="wrap talk-grid ${a && b ? "" : "one"}">${a}${b}</div></section>`;
   }
 
   function evCard(ev, opts = {}) {
@@ -596,7 +627,7 @@
     </section>
     ${
       socialIcons()
-        ? `<div class="soc-bar"><div class="wrap soc-bar-in">${pin("site:contact", "Edit socials")}<span class="soc-label">Follow us</span>${socialIcons("soc-big")}</div></div>`
+        ? `<div class="soc-bar"><div class="wrap soc-bar-in">${pin("site:contact", "Edit socials")}<div class="soc-text"><span class="soc-label">Follow us</span><span class="soc-sub">Event updates, photos and more.</span></div>${socialIcons("soc-big")}</div></div>`
         : ""
     }
 
@@ -669,8 +700,7 @@
       )
       .join("")}
 
-    ${joinSection()}
-    ${ideasSection()}`;
+    ${talkSection()}`;
   }
 
   /* Events page */
@@ -780,7 +810,7 @@
       </div></section>`
           : ""
       }
-      ${joinSection()}`;
+      ${talkSection()}`;
   }
   function leadPill(p, role) {
     return `<div class="lead-pill"><span class="av">${img(p.photo, p.name, "")}</span><span><small>${esc(role)}</small><b>${esc(p.name || "Name")}</b></span></div>`;
@@ -852,7 +882,7 @@
         ${up.length ? `<div class="ev-grid">${up.map((e) => evCard(e)).join("")}</div>` : `<div class="empty">New events coming soon.</div>`}
         ${past.length ? `<h3 style="font-size:36px;margin:48px 0 18px">Recently</h3><div class="ev-grid">${past.map((e) => evCard(e, { small: true })).join("")}</div>` : ""}
       </div></section>
-      ${ideasSection(c)}`;
+      ${talkSection(c)}`;
   }
 
   function teamTotals(sb) {
@@ -1344,6 +1374,12 @@
       }
       gsap.fromTo($$(".rail-card", rs), { y: 80, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.07, duration: 1, ease: "power3.out", scrollTrigger: { trigger: rs, start: "top 70%", once: true } });
     }
+    // "Follow us" icons pop in one by one
+    const sb = $(".soc-bar", main);
+    if (sb) {
+      gsap.fromTo($$(".soc-big a", sb), { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(2.2)", stagger: 0.09, scrollTrigger: { trigger: sb, start: "top 92%", once: true } });
+      gsap.fromTo($$(".soc-text > *", sb), { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", stagger: 0.08, scrollTrigger: { trigger: sb, start: "top 92%", once: true } });
+    }
     // Spirit bowl graph: bars shoot up one by one, the crown drops onto the leader
     $$(".sg", main).forEach((g) => {
       const bars = $$(".sg-bar", g);
@@ -1576,6 +1612,48 @@
     }
   });
   window.addEventListener("hashchange", go);
+  document.addEventListener("submit", async (e) => {
+    const form = e.target.closest && e.target.closest(".talk-form");
+    if (!form) return;
+    e.preventDefault();
+    const cfg = ideasConfig();
+    const card = form.closest(".talk-card");
+    const err = $(".talk-err", form);
+    const btn = $(".talk-send", form);
+    const v = (n) => (form.elements[n] ? form.elements[n].value.trim() : "");
+    err.textContent = "";
+    if (v("website")) return; // filled in by spam bots only
+    if (!v("message")) return (err.textContent = "Type a message first."), form.elements.message.focus();
+    if (v("email") && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v("email"))) return (err.textContent = "That email doesn't look right. You can also leave it blank.");
+    if (!cfg) return (err.textContent = "The form isn't set up yet.");
+    const kind = (form.querySelector('input[name="kind"]:checked') || {}).value || cfg.choices[0];
+    const where = form.dataset.where;
+    const values = [kind, (where ? `[${where} page] ` : "") + v("message"), v("name"), v("email")];
+    const body = new URLSearchParams();
+    cfg.ids.forEach((id, i) => values[i] != null && values[i] !== "" && body.append(id, values[i]));
+    btn.disabled = true;
+    btn.innerHTML = "Sending…";
+    try {
+      // Google doesn't let other sites read its reply, so a finished request counts as sent
+      await fetch(cfg.action, { method: "POST", mode: "no-cors", body });
+      form.hidden = true;
+      $(".talk-done", card).hidden = false;
+      if (hasGsap && !reduceMotion) gsap.fromTo($(".talk-done", card), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" });
+      form.reset();
+    } catch (_) {
+      err.textContent = "Couldn't send. Check your internet connection and try again.";
+    }
+    btn.disabled = false;
+    btn.innerHTML = 'Send <span class="arr">→</span>';
+  });
+  document.addEventListener("click", (e) => {
+    const again = e.target.closest && e.target.closest(".talk-again");
+    if (!again) return;
+    const card = again.closest(".talk-card");
+    $(".talk-done", card).hidden = true;
+    $(".talk-form", card).hidden = false;
+    $("textarea", card).focus();
+  });
   document.addEventListener("click", (e) => {
     const a = e.target.closest && e.target.closest('a[href^="#/"]');
     if (a && a.getAttribute("href") === (location.hash || "#/")) {

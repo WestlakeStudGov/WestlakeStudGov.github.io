@@ -74,7 +74,14 @@
    "url": ""
   },
   "schoolOverrides": {},
-  "presets": []
+  "presets": [],
+  "ideasForm": {
+   "on": true,
+   "prefill": "https://docs.google.com/forms/d/e/1FAIpQLSeW0rInOMPWgD7cHNcF79NJZV7UqEL-9dNH4ri9g41Z7R6BSg/viewform?usp=pp_url&entry.188166953=An+event+idea&entry.761919311=Test&entry.1139183281=Test&entry.997499218=Test",
+   "choices": "An event idea\nA suggestion\nA question",
+   "title": "What do you want to see student government do?",
+   "intro": "Share an event idea, a suggestion or a question. It goes straight to student government."
+  }
  },
  "home": {
   "pastPhotos": [],
