@@ -4,6 +4,7 @@ Small changes go up by .1 (1.1, 1.2 ... 1.9, 1.10, 1.11). Big changes that make 
 
 | Version | Date | What changed |
 |---|---|---|
+| 1.7 | 2026-11-23 | Short link westlakestudgov.github.io/christmas-jars and link preview cards for it and the home page |
 | 1.6 | 2026-11-23 | Ideas and questions form on the site (sends to the Google Form) next to "Want to join?"; bigger Follow us bar |
 | 1.5 | 2026-11-23 | Email buttons only copy the address (no email app opens) |
 | 1.4 | 2026-11-23 | Stuff the Jars Night now starts at 5:00 PM |
