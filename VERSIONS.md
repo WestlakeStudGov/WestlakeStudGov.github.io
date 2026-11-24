@@ -4,6 +4,7 @@ Small changes go up by .1 (1.1, 1.2 ... 1.9, 1.10, 1.11). Big changes that make 
 
 | Version | Date | What changed |
 |---|---|---|
+| 1.10 | 2026-11-23 | Presets tab in edit mode: add presets directly, rename and delete them, choose which ones events get automatically |
 | 1.9 | 2026-11-23 | Event dates say Today / Tomorrow / Today and tomorrow / Now through; gold TODAY tag on events happening today |
 | 1.8 | 2026-11-23 | Presets are now real photos (26 free Unsplash photos + the real Christmas Jars photo); new Christmas Jars link preview card with the jar photo |
 | 1.7 | 2026-11-23 | Short link westlakestudgov.github.io/christmas-jars and link preview cards for it and the home page |

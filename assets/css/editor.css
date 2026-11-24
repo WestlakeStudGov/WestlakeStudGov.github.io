@@ -123,3 +123,14 @@ body.ed-panel-open .ed-bar{left:calc((100vw - min(460px,100vw)) / 2)}
 .ed-school .ed-btn{padding:6px 12px;font-size:13px}
 .ed-school.off .ed-item-main{opacity:.45;text-decoration:line-through}
 @media (max-width:520px){.ed-school{flex-wrap:wrap}.ed-school .ed-tools{width:100%;justify-content:flex-end}}
+
+/* presets tab */
+.ed-pre-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:8px;margin:6px 0 12px}
+.ed-pre{border:1.5px solid var(--line);border-radius:12px;padding:6px;display:flex;flex-direction:column;gap:6px;background:var(--white);opacity:.6}
+.ed-pre.on{opacity:1;border-color:var(--navy)}
+.ed-pre .ed-thumb{width:100%;height:78px}
+.ed-pre input[type=text],.ed-pre select{width:100%;border:1.5px solid var(--line);border-radius:8px;padding:5px 7px;font:12px var(--body);color:var(--navy);background:var(--white)}
+.ed-pre small{font-size:11px;line-height:1.3}
+.ed-pre-row{display:flex;justify-content:space-between;align-items:center}
+.ed-pre-row .ed-check{font-size:13px;gap:6px}
+.ed-pre-row .ed-check input{width:16px;height:16px}

@@ -226,12 +226,21 @@
   const BUILTIN_PRESETS = PRESET_KINDS.flatMap(([k, label]) =>
     presetFiles(k).map((src, i, all) => ({ src, label: all.length > 1 ? `${label} ${i + 1}` : label, kind: k }))
   ).concat([  ]);
-  WSG.presets = () => BUILTIN_PRESETS.concat((D().site.presets || []).filter((x) => x && x.src).map((x) => ({ ...x, custom: true })));
+  WSG.presets = () => BUILTIN_PRESETS.concat((D().site.presets || []).filter((x) => x && x.src).map((x) => ({ ...x, kind: x.kind || "", custom: true })));
+  WSG.presetKinds = () => PRESET_KINDS.map(([k, label]) => ({ k, label }));
+  // Which presets events can get automatically: built-in ones unless switched off, added ones only if switched on
+  const autoOn = (x) => {
+    const o = (D().site.presetAuto || {})[x.src];
+    return o == null ? !x.custom : !!o;
+  };
+  WSG.presetAutoOn = autoOn;
   const hashStr = (t) => [...String(t)].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
   // A matching preset picture for anything without a photo
   function autoPhoto(title, kind, id) {
     const k = kind || (PRESET_KINDS.find(([, , rx]) => rx.test(title || "")) || ["school"])[0];
-    const files = presetFiles(k);
+    const on = WSG.presets().filter((x) => x.kind === k && autoOn(x)).map((x) => x.src);
+    const files = on.length ? on : k === "school" ? presetFiles("school") : null;
+    if (!files) return autoPhoto("", "school", id); // every picture for this kind is switched off
     return files[hashStr(id || title) % files.length]; // mixes the versions so a row of games doesn't look identical
   }
   const evPhoto = (e) => e.photo || autoPhoto(e.title, e.category, e.id);

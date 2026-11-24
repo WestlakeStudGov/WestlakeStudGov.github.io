@@ -804,6 +804,7 @@
     { id: "people", label: "People" },
     { id: "pages", label: "Special pages" },
     { id: "school", label: "School events" },
+    { id: "presets", label: "Presets" },
     { id: "filters", label: "Filters" },
     { id: "settings", label: "Settings" },
   ];
@@ -950,6 +951,8 @@
       body.appendChild(buildForm(D().site, S.site, changed));
       body.appendChild(el("h3", {}, "Home page photos"));
       body.appendChild(buildForm(D().home, S.home, changed));
+    } else if (view.tab === "presets") {
+      drawPresets(body);
     } else if (view.tab === "school") {
       drawSchool(body);
     } else if (view.tab === "banner") {
@@ -974,6 +977,96 @@
     else if (view.id) drawItem(body);
     else drawList(body);
   }
+  /* ---------- Presets tab ---------- */
+  function drawPresets(body) {
+    const site = D().site;
+    if (!site.presets) site.presets = [];
+    if (!site.presetAuto) site.presetAuto = {};
+    const kinds = WSG.presetKinds();
+    body.appendChild(el("h3", {}, "Presets"));
+    body.appendChild(
+      el(
+        "p",
+        { class: "ed-intro" },
+        "Ready-made pictures anyone can pick with \"Pick a preset\". Events without a photo get one automatically from the ones with Auto on, matched by kind (a basketball game gets a Basketball picture)."
+      )
+    );
+    const add = el("button", { type: "button", class: "ed-btn ed-btn-gold ed-add" }, "+ Add preset");
+    add.addEventListener("click", async () => {
+      const files = await pickFiles(true);
+      if (!files.length) return;
+      busy(true, files.length > 1 ? `Uploading ${files.length} photos…` : "Uploading…");
+      try {
+        for (const file of files) {
+          const src = await uploadImage(file, {});
+          site.presets.push({ src, label: file.name.replace(/\.[^.]+$/, "").slice(0, 40), kind: "" });
+          site.presetAuto[src] = true;
+        }
+        changed({ now: true });
+        toast("Added. Give it a name and pick its kind below.");
+      } catch (e) {
+        toast(e.message || "Upload failed", true);
+      }
+      busy(false);
+      drawPanel();
+    });
+    body.appendChild(add);
+
+    const all = WSG.presets().filter((x) => x.kind !== "logo");
+    const groups = kinds.map(({ k, label }) => [label, all.filter((x) => x.kind === k)]);
+    groups.unshift(["Needs a kind (not used automatically)", all.filter((x) => x.custom && !kinds.some((t) => t.k === x.kind))]);
+    groups.forEach(([label, list]) => {
+      if (!list.length) return;
+      const onCount = list.filter((x) => WSG.presetAutoOn(x)).length;
+      body.appendChild(el("div", { class: "ed-group-title" }, label.startsWith("Needs") ? esc(label) : `${esc(label)} · ${onCount} of ${list.length} automatic`));
+      const grid = el("div", { class: "ed-pre-grid" });
+      list.forEach((x) => {
+        const card = el("div", { class: "ed-pre" + (WSG.presetAutoOn(x) ? " on" : "") });
+        card.appendChild(el("div", { class: "ed-thumb" }, `<img src="${esc(WSG.imgSrc(x.src))}" alt="" loading="lazy">`));
+        const mine = site.presets.find((p) => p.src === x.src);
+        if (mine) {
+          const name = el("input", { type: "text", maxlength: 40, value: mine.label || "", "aria-label": "Preset name", placeholder: "Name" });
+          name.addEventListener("input", () => ((mine.label = name.value), changed()));
+          card.appendChild(name);
+          const kind = el("select", { "aria-label": "Kind" });
+          kind.appendChild(el("option", { value: "" }, "Pick a kind…"));
+          kinds.forEach(({ k, label }) => kind.appendChild(el("option", { value: k }, esc(label))));
+          kind.value = mine.kind || "";
+          kind.addEventListener("change", () => ((mine.kind = kind.value), changed({ now: true }), drawPanel()));
+          card.appendChild(kind);
+        } else card.appendChild(el("small", { class: "ed-muted" }, esc(x.label) + " · built in"));
+        const row = el("div", { class: "ed-pre-row" });
+        const id = "pa" + Math.random().toString(36).slice(2, 8);
+        const cb = el("input", { type: "checkbox", id });
+        cb.checked = WSG.presetAutoOn(x);
+        cb.disabled = !!(mine && !mine.kind);
+        cb.addEventListener("change", () => {
+          site.presetAuto[x.src] = cb.checked;
+          card.classList.toggle("on", cb.checked);
+          changed({ now: true });
+        });
+        const lab = el("label", { for: id, class: "ed-check" });
+        lab.appendChild(cb);
+        lab.appendChild(el("span", {}, "Auto"));
+        row.appendChild(lab);
+        if (mine) {
+          const del = el("button", { type: "button", class: "ed-tool", title: "Delete preset", "aria-label": "Delete preset" }, "🗑");
+          del.addEventListener("click", async () => {
+            if (!(await confirmBox("Delete this preset?", "Events already using it keep their photo."))) return;
+            site.presets.splice(site.presets.indexOf(mine), 1);
+            delete site.presetAuto[x.src];
+            changed({ now: true });
+            drawPanel();
+          });
+          row.appendChild(del);
+        }
+        card.appendChild(row);
+        grid.appendChild(card);
+      });
+      body.appendChild(grid);
+    });
+  }
+
   function drawSchool(body) {
     const site = D().site;
     if (!site.schoolCalendar) site.schoolCalendar = { on: true, url: "" };

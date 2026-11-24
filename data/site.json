@@ -81,7 +81,8 @@
    "choices": "An event idea\nA suggestion\nA question",
    "title": "What do you want to see student government do?",
    "intro": "Share an event idea, a suggestion or a question. It goes straight to student government."
-  }
+  },
+  "presetAuto": {}
  },
  "home": {
   "pastPhotos": [],
