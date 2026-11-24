@@ -83,7 +83,8 @@
    "intro": "Share an event idea, a suggestion or a question. It goes straight to student government."
   },
   "presetAuto": {},
-  "wipeLogo": "assets/img/w-logo.png"
+  "wipeLogo": "assets/img/w-logo.png",
+  "photoFocus": {}
  },
  "home": {
   "pastPhotos": [],
@@ -296,7 +297,7 @@
    "title": "Class President",
    "duties": "",
    "bio": "",
-   "photo": "",
+   "photo": "assets/uploads/2026/mwuccodb-0c410678-b7a6-4ef3-a4f9-.jpg",
    "email": "jonesnix002@alpinesd.org",
    "instagram": ""
   },
