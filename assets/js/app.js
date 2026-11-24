@@ -1466,13 +1466,31 @@
       more.remove();
       return;
     }
-    // Email links: copy the address (always works) and still let the email app open if there is one
+    // Email links just copy the address (no email app opens)
     const mail = t.closest('a[href^="mailto:"]');
     if (mail && !t.closest(".edit-pin")) {
+      e.preventDefault();
       const addr = decodeURIComponent(mail.getAttribute("href").slice(7).split("?")[0]);
       const done = () => flash(`Email copied: ${addr}`);
-      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(addr).then(done, () => flash(addr));
-      else flash(addr);
+      const oldWay = () => {
+        // Older phones: copy through a hidden text box
+        const ta = document.createElement("textarea");
+        ta.value = addr;
+        ta.setAttribute("readonly", "");
+        ta.style.cssText = "position:fixed;top:0;left:0;opacity:0";
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, addr.length);
+        let ok = false;
+        try {
+          ok = document.execCommand("copy");
+        } catch (_) {}
+        ta.remove();
+        ok ? done() : flash(addr);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(addr).then(done, oldWay);
+      else oldWay();
+      return;
     }
     const sc = t.closest("[data-scrollto]");
     if (sc) {
