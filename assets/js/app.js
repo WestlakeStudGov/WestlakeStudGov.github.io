@@ -93,21 +93,58 @@
     return { ...ev, start: pick.start, end: pick.end, _left: i < 0 ? 0 : occ.length - i - 1 };
   }
   WSG.occurrences = occurrences;
+  const startOfToday = () => {
+    const t = new Date();
+    t.setHours(0, 0, 0, 0);
+    return t;
+  };
+  // "Today" / "Tomorrow" for those two days, otherwise nothing
+  function relDay(d) {
+    if (!d || isNaN(d)) return "";
+    const n = Math.round((new Date(d.getFullYear(), d.getMonth(), d.getDate()) - startOfToday()) / 864e5);
+    return n === 0 ? "Today" : n === 1 ? "Tomorrow" : "";
+  }
+  // Happening at some point today (a single date, one of several dates, or a range that includes today)
+  function happeningToday(ev) {
+    if (isPast(ev)) return false;
+    const t0 = startOfToday();
+    return occurrences(ev).some((o) => {
+      const a = toDate(o.start.slice(0, 10));
+      const b = toDate((o.end || o.start).slice(0, 10));
+      return a && b && a <= t0 && b >= t0;
+    });
+  }
+  WSG.happeningToday = (e) => happeningToday(e);
   function fmtWhen(ev0) {
     const ev = nextOcc(ev0);
     const s = toDate(ev.start);
     if (!s || isNaN(s)) return ev.done ? "Earlier this year" : ev.timeNote ? ev.timeNote : "Date to be announced";
     const e = toDate(ev.end);
-    let out = `${DAYS[s.getDay()]}, ${MONTHS[s.getMonth()]} ${s.getDate()}`;
+    const multiDay = e && !isNaN(e) && e.toDateString() !== s.toDateString();
+    let left = ev._left || 0;
+    let out;
+    const rel = relDay(s);
+    if (multiDay && s < startOfToday() && dayEnd(ev.end) >= new Date()) {
+      // already started and still going, like a week of lunch activities
+      out = `Now through ${relDay(e) || `${MONTHS[e.getMonth()]} ${e.getDate()}`}`;
+    } else {
+      out = rel || `${DAYS[s.getDay()]}, ${MONTHS[s.getMonth()]} ${s.getDate()}`;
+      if (rel === "Today" && left) {
+        // the same event again tomorrow (like a play's second night)
+        const occ = occurrences(ev0);
+        const i = occ.findIndex((o) => o.start === ev.start);
+        if (occ[i + 1] && relDay(toDate(occ[i + 1].start)) === "Tomorrow") {
+          out = "Today and tomorrow";
+          left -= 1;
+        }
+      }
+      if (multiDay) out += ` – ${relDay(e) || `${MONTHS[e.getMonth()]} ${e.getDate()}`}`;
+    }
     const hasTime = ev.start.length > 10 && !ev.timeNote;
     if (hasTime) out += ` · ${fmtTime(s)}`;
-    if (e && !isNaN(e)) {
-      if (e.toDateString() === s.toDateString()) {
-        if (ev.end.length > 10 && !ev.timeNote) out += ` – ${fmtTime(e)}`;
-      } else out += ` – ${MONTHS[e.getMonth()]} ${e.getDate()}`;
-    }
+    if (e && !isNaN(e) && !multiDay && ev.end.length > 10 && !ev.timeNote) out += ` – ${fmtTime(e)}`;
     if (ev.timeNote) out += ` · ${ev.timeNote}`;
-    if (ev._left) out += ` (+${ev._left} more date${ev._left === 1 ? "" : "s"})`;
+    if (left) out += ` (+${left} more date${left === 1 ? "" : "s"})`;
     return out;
   }
   const dateBlock = (ev) => {
@@ -497,7 +534,7 @@
     return `<div class="ev-card rv ${opts.small ? "small" : ""} ${past ? "past" : ""} ${opts.cls || ""}" role="button" tabindex="0" data-event="${esc(ev.id)}">
       <div class="media">${dateBlock(ev)}${
         opts.small ? "" : ev.ours ? `<span class="badge-ours">${esc(D().site.short || "WSG")}</span>` : `<span class="badge-ours badge-promo">${ev.school ? "Westlake High" : "We're promoting"}</span>`
-      }${img(evPhoto(ev), ev.title, ev.title)}</div>
+      }${happeningToday(ev) ? `<span class="today-tag">Today</span>` : ""}${img(evPhoto(ev), ev.title, ev.title)}</div>
       <div class="ev-body">
         <h3>${esc(ev.title)}</h3>
         <div class="ev-meta"><span>${esc(fmtWhen(ev))}</span>${ev.location ? `<span>${esc(ev.location)}</span>` : ""}${
@@ -642,7 +679,7 @@
             ? `<div class="feature-list">${featured
                 .map(
                   (e) => `<button class="feature rv" type="button" data-event="${esc(e.id)}">
-              <div class="media">${img(evPhoto(e), e.title, e.title)}</div>
+              <div class="media">${happeningToday(e) ? `<span class="today-tag">Today</span>` : ""}${img(evPhoto(e), e.title, e.title)}</div>
               <div class="feature-body"><div class="feature-date">${esc(fmtWhen(e))}</div><h3>${esc(e.title)}</h3><p>${esc(e.description || "")}</p><span class="btn btn-gold" style="align-self:flex-start">Details <span class="arr">→</span></span></div>
             </button>`
                 )
