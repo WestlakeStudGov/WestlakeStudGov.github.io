@@ -355,7 +355,15 @@
     const s = D().site;
     $("#brandShort").textContent = s.short || "WSG";
     $("#brandSchool").textContent = s.school || "";
-    $("#wipeMark").textContent = s.short || "WSG";
+    // Page-change screen: the logo (W with lightning by default), or the short name if there's no logo
+    const wl = s.wipeLogo === undefined ? "assets/img/w-logo.png" : s.wipeLogo;
+    const want = wl ? imgSrc(wl) : "";
+    const mk = $("#wipeMark");
+    if (mk.dataset.src !== want) {
+      mk.dataset.src = want;
+      mk.innerHTML = want ? `<img src="${esc(want)}" alt="" decoding="async">` : esc(s.short || "WSG");
+      mk.classList.toggle("has-logo", !!want);
+    }
     $("#brandLogo").innerHTML = s.logo
       ? `<img src="${esc(imgSrc(s.logo))}" alt="">`
       : `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2 5 14h6l-2 8 10-13h-6z" fill="currentColor"/></svg>`;
@@ -1527,10 +1535,10 @@
     gsap.killTweensOf([w, mark]);
     gsap.set(w, { y: 0, yPercent: 100, visibility: "visible" });
     gsap.to(w, { yPercent: 0, duration: 0.5, ease: "power4.inOut" });
-    gsap.fromTo(mark, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3, delay: 0.3 });
+    gsap.fromTo(mark, { opacity: 0, y: 30, scale: 0.86 }, { opacity: 1, y: 0, scale: 1, duration: 0.42, delay: 0.26, ease: "back.out(1.8)" });
     setTimeout(() => {
       render();
-      gsap.to(mark, { opacity: 0, y: -20, duration: 0.25 });
+      gsap.to(mark, { opacity: 0, y: -24, scale: 1.04, duration: 0.25 });
       gsap.to(w, { yPercent: -100, duration: 0.6, ease: "power4.inOut", delay: 0.15, onComplete: () => gsap.set(w, { visibility: "hidden" }) });
       setTimeout(() => {
         busy = false;

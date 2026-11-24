@@ -210,6 +210,7 @@
       { k: "logo", t: "image", l: "Menu logo (top left)", hint: "Shown on a white badge.", png: true, max: 400 },
       { k: "heroLogo", t: "image", l: "Logo next to the mission statement", png: true, max: 900 },
       { k: "footerLogo", t: "image", l: "Logo at the bottom of every page", png: true, max: 900 },
+      { k: "wipeLogo", t: "image", l: "Page-change logo", hint: "Shows on the navy screen that swipes up between pages. Logos with a light or gold edge look best. Remove it to show the short name instead.", png: true, max: 900 },
       { k: "heroPhoto", t: "image", l: "Whole council photo (home page)", hint: "Use a wide (landscape) photo." },
       { k: "heroCaption", t: "text", l: "Photo caption", max: 60 },
       { k: "intro", t: "textarea", l: "Big mission statement", max: 260, hint: "One or two sentences. Shown big on the home page." },
