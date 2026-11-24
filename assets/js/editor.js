@@ -15,6 +15,7 @@
   const Ed = (window.WSGEditor = {});
   let session = null; // {role, owner, repo, branch, token, test}
   let baseSha = null; // sha of data/site.json when editing started
+  let baseData = null; // copy of the site data at that moment, so Publish can send only your changes
   let dirty = false;
   let view = { tab: "site", id: null };
   const uid = () => Math.random().toString(36).slice(2, 8) + Date.now().toString(36).slice(-3);
@@ -82,6 +83,23 @@
     return r.status === 204 ? {} : r.json();
   }
   const store = {
+    // The newest saved copy of a JSON file: { sha, data }
+    async getJson(path) {
+      if (session.test) {
+        let data = null;
+        try {
+          const t = localStorage.getItem(TEST_KEY);
+          if (t) data = JSON.parse(t);
+        } catch (_) {}
+        if (!data) data = await (await fetch(path + "?v=" + Date.now(), { cache: "no-store" })).json();
+        return { sha: localStorage.getItem("wsg-test-sha") || "local", data };
+      }
+      const f = await gh("GET", `/contents/${path}?ref=${encodeURIComponent(session.branch)}&t=${Date.now()}`);
+      if (!f) return null;
+      const bin = atob(String(f.content || "").replace(/\s/g, ""));
+      const bytes = Uint8Array.from(bin, (ch) => ch.charCodeAt(0));
+      return { sha: f.sha, data: JSON.parse(new TextDecoder().decode(bytes)) };
+    },
     async sha(path) {
       if (session.test) return localStorage.getItem("wsg-test-sha") || "local";
       const f = await gh("GET", `/contents/${path}?ref=${encodeURIComponent(session.branch)}`);
@@ -107,7 +125,22 @@
       }
       const body = { message, content: base64, branch: session.branch };
       if (sha) body.sha = sha;
-      return gh("PUT", `/contents/${path}`, body);
+      // Lots of people saving in the same minute (like a whole class): GitHub may say "busy" or
+      // "slow down". Wait a moment and try again instead of failing. (The site file itself is
+      // retried by Publish, which re-checks everyone's newest changes first.)
+      for (let attempt = 0; ; attempt++) {
+        try {
+          return await gh("PUT", `/contents/${path}`, body);
+        } catch (e) {
+          const slowDown = e.status === 429 || (e.status === 403 && /rate limit|abuse/i.test(e.message));
+          const busyBranch = e.status === 409 && path !== "data/site.json";
+          if ((slowDown || busyBranch) && attempt < 6) {
+            await new Promise((r) => setTimeout(r, (slowDown ? 4000 : 600) * (attempt + 1) + Math.random() * 1000));
+            continue;
+          }
+          throw e;
+        }
+      }
     },
   };
 
@@ -130,7 +163,7 @@
   }
   function saveDraft() {
     try {
-      localStorage.setItem(DRAFT_KEY, JSON.stringify({ data: WSG.data, baseSha, time: Date.now() }));
+      localStorage.setItem(DRAFT_KEY, JSON.stringify({ data: WSG.data, base: baseData, baseSha, time: Date.now() }));
     } catch (_) {}
   }
   function clearDraft() {
@@ -152,9 +185,11 @@
       const d = JSON.parse(localStorage.getItem(DRAFT_KEY) || "null");
       if (d && d.data) {
         WSG.data = d.data;
+        baseData = d.base || null;
         dirty = true;
       }
     } catch (_) {}
+    if (!baseData) baseData = cleanCopy(WSG.data);
     setTimeout(() => {
       buildShell();
       updateBar();
@@ -1524,10 +1559,13 @@
     session = s;
     WSG.editMode = true;
     try {
-      baseSha = await store.sha("data/site.json");
+      const latest = await store.getJson("data/site.json");
+      baseSha = latest ? latest.sha : null;
+      if (latest && latest.data && !dirty) WSG.data = latest.data;
     } catch (_) {
       baseSha = null;
     }
+    baseData = cleanCopy(WSG.data);
     saveSession();
     buildShell();
     updateBar();
@@ -1536,32 +1574,121 @@
   }
 
   /* ---------- publish ---------- */
+  /* ---------- Publish only your changes ----------
+     Many people can edit at once. Publish grabs the newest saved copy and applies only
+     what YOU changed since you started (or last published), so nobody undoes anyone else.
+     If two people changed the very same thing, the one who publishes last wins. */
+  function cleanCopy(v) {
+    return JSON.parse(JSON.stringify(v, (k, x) => (k.startsWith("_") ? undefined : x)));
+  }
+  const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+  const isObj = (v) => v && typeof v === "object" && !Array.isArray(v);
+  const keyOf = (x) => (isObj(x) ? (x.id != null ? "id:" + x.id : x.src != null ? "src:" + x.src : null) : null);
+  function merge3(base, mine, theirs, c) {
+    if (same(mine, base)) return theirs; // I didn't touch it
+    if (same(theirs, base) || same(mine, theirs)) return mine; // only I changed it
+    if (isObj(mine) && isObj(theirs)) {
+      const b = isObj(base) ? base : {};
+      const out = {};
+      for (const k of new Set([...Object.keys(theirs), ...Object.keys(mine), ...Object.keys(b)])) {
+        const inB = k in b, inM = k in mine, inT = k in theirs;
+        if (!inM && inB) {
+          // I removed it; keep it only if someone else changed it meanwhile
+          if (inT && !same(theirs[k], b[k])) (out[k] = theirs[k]), c.n++;
+          continue;
+        }
+        if (!inT && inB) {
+          if (inM && !same(mine[k], b[k])) (out[k] = mine[k]), c.n++;
+          continue;
+        }
+        if (!inT) out[k] = mine[k];
+        else if (!inM) out[k] = theirs[k];
+        else out[k] = merge3(inB ? b[k] : undefined, mine[k], theirs[k], c);
+      }
+      return out;
+    }
+    if (Array.isArray(mine) && Array.isArray(theirs)) {
+      const B = Array.isArray(base) ? base : [];
+      const all = mine.concat(theirs, B);
+      if (all.length && all.every((x) => keyOf(x))) {
+        // lists of people, events, committees, photos…: match items by id
+        const bm = new Map(B.map((x) => [keyOf(x), x])),
+          mm = new Map(mine.map((x) => [keyOf(x), x])),
+          tm = new Map(theirs.map((x) => [keyOf(x), x]));
+        const iReordered = !same(B.map(keyOf).filter((k) => mm.has(k)), mine.map(keyOf).filter((k) => bm.has(k)));
+        const order = (iReordered ? mine : theirs).map(keyOf);
+        (iReordered ? theirs : mine).map(keyOf).forEach((k) => order.includes(k) || order.push(k));
+        const out = [];
+        for (const k of order) {
+          const bx = bm.get(k), m = mm.get(k), t = tm.get(k);
+          if (!m && bx) {
+            if (t && !same(t, bx)) out.push(t), c.n++;
+            continue;
+          }
+          if (!t && bx) {
+            if (m && !same(m, bx)) out.push(m), c.n++;
+            continue;
+          }
+          out.push(!t ? m : !m ? t : merge3(bx, m, t, c));
+        }
+        return out;
+      }
+      if (all.every((x) => x === null || typeof x !== "object")) {
+        // simple lists (like committee member ids): apply my adds and removes to theirs
+        const added = mine.filter((x) => !B.includes(x)),
+          removed = B.filter((x) => !mine.includes(x));
+        const out = theirs.filter((x) => !removed.includes(x));
+        added.forEach((x) => out.includes(x) || out.push(x));
+        return out;
+      }
+    }
+    c.n++; // both changed the same thing: the one publishing now wins
+    return mine;
+  }
+  WSG._merge3 = merge3; // for testing
+
   async function publish() {
     if (!dirty) return toast("Everything is already published.");
     busy(true, "Publishing…");
-    try {
-      const current = await store.sha("data/site.json");
-      if (baseSha && current && current !== baseSha && !session.test) {
+    const mine = cleanCopy(D());
+    const base = baseData || mine;
+    let tries = 0;
+    for (;;) {
+      try {
+        const latest = await store.getJson("data/site.json");
+        const c = { n: 0 };
+        const others = latest && latest.data && latest.sha !== baseSha;
+        const merged = latest && latest.data ? merge3(base, mine, cleanCopy(latest.data), c) : mine;
+        const res = await store.put("data/site.json", utf8b64(JSON.stringify(merged, null, 1)), `Site update by ${session.role}`, latest ? latest.sha : undefined);
+        baseSha = res && res.content ? res.content.sha : null;
+        baseData = cleanCopy(merged);
+        WSG.data = merged;
+        dirty = false;
+        clearDraft();
+        saveSession();
+        updateBar();
         busy(false);
-        const go = await confirmBox(
-          "Someone else published changes",
-          "Another editor published since you started. If you publish now, your version replaces theirs. Download a backup first if you're not sure."
+        WSG.refresh();
+        drawPanel();
+        const live = session.test ? "Saved to the preview copy on this computer." : "Published! The live site updates in about a minute.";
+        toast(
+          c.n
+            ? `${live} Someone else had changed ${c.n === 1 ? "one of the same things" : c.n + " of the same things"} you did; your version was used.`
+            : others
+            ? `${live} Other people's latest changes are showing now too.`
+            : live
         );
-        if (!go) return;
-        busy(true, "Publishing…");
+        return;
+      } catch (e) {
+        // Someone published in the same second: grab their copy and try again
+        if ((e.status === 409 || e.status === 422) && ++tries < 5) {
+          await new Promise((r) => setTimeout(r, 400 + Math.random() * 900));
+          continue;
+        }
+        busy(false);
+        toast(e.status === 401 ? "The GitHub key stopped working. An adviser can add a new one in Settings." : "Publish failed: " + e.message, true);
+        return;
       }
-      const clean = JSON.parse(JSON.stringify(D(), (k, v) => (k.startsWith("_") ? undefined : v)));
-      const res = await store.put("data/site.json", utf8b64(JSON.stringify(clean, null, 1)), `Site update by ${session.role}`, current);
-      baseSha = res && res.content ? res.content.sha : null;
-      dirty = false;
-      clearDraft();
-      saveSession();
-      updateBar();
-      busy(false);
-      toast(session.test ? "Saved to the preview copy on this computer." : "Published! The live site updates in about a minute.");
-    } catch (e) {
-      busy(false);
-      toast(e.status === 401 ? "The GitHub key stopped working. An adviser can add a new one in Settings." : "Publish failed: " + e.message, true);
     }
   }
 
