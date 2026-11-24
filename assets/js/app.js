@@ -182,20 +182,20 @@
     ["community", "Community", /community|festival|carnival|fair\b|parent|family|zero fatalities|service|breakfast/i],
     ["school", "Westlake bolt", /./],
   ];
+  // Real photos (Unsplash, free to use; see assets/presets/photos/CREDITS.md), how many of each kind
+  const PHOTO_COUNT = { volleyball: 2, basketball: 2, football: 2, soccer: 2, baseball: 2, softball: 1, tennis: 1, wrestling: 1, swim: 1, track: 2, golf: 1, cheer: 1, christmas: 1, dance: 2, concert: 2, theater: 2, community: 2 };
+  const presetFiles = (k) =>
+    PHOTO_COUNT[k] ? Array.from({ length: PHOTO_COUNT[k] }, (_, i) => `assets/presets/photos/${k}-${i + 1}.jpg`) : [`assets/presets/${k}-navy.svg`, `assets/presets/${k}-blue.svg`];
   const BUILTIN_PRESETS = PRESET_KINDS.flatMap(([k, label]) =>
-    ["navy", "blue"].map((bg) => ({ src: `assets/presets/${k}-${bg}.svg`, label: `${label} (${bg})`, kind: k }))
-  ).concat([
-    { src: "assets/img/thunder-mascot.png", label: "Thunder mascot logo", kind: "logo" },
-    { src: "assets/img/thor-mighty-thunder.png", label: "Mighty Thunder logo", kind: "logo" },
-    { src: "assets/img/westlake-thunder-wordmark.png", label: "Westlake Thunder wordmark", kind: "logo" },
-    { src: "assets/img/thunder-hammer.png", label: "Thunder hammer logo", kind: "logo" },
-  ]);
+    presetFiles(k).map((src, i, all) => ({ src, label: all.length > 1 ? `${label} ${i + 1}` : label, kind: k }))
+  ).concat([  ]);
   WSG.presets = () => BUILTIN_PRESETS.concat((D().site.presets || []).filter((x) => x && x.src).map((x) => ({ ...x, custom: true })));
   const hashStr = (t) => [...String(t)].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
-  // A matching preset picture for anything without a photo (alternates navy/blue so a row of games doesn't look identical)
+  // A matching preset picture for anything without a photo
   function autoPhoto(title, kind, id) {
     const k = kind || (PRESET_KINDS.find(([, , rx]) => rx.test(title || "")) || ["school"])[0];
-    return `assets/presets/${k}-${hashStr(id || title) % 2 ? "blue" : "navy"}.svg`;
+    const files = presetFiles(k);
+    return files[hashStr(id || title) % files.length]; // mixes the versions so a row of games doesn't look identical
   }
   const evPhoto = (e) => e.photo || autoPhoto(e.title, e.category, e.id);
 
