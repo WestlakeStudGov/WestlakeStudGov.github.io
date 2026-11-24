@@ -746,6 +746,19 @@
         btns.appendChild(rm);
       }
       box.appendChild(btns);
+      if (obj[f.k] && !/\.svg$|assets\/img\//.test(obj[f.k])) {
+        // where the photo is anchored when a spot crops it (keeps faces in view)
+        const map = D().site.photoFocus || (D().site.photoFocus = {});
+        const sel = el("select", { class: "ed-focus", "aria-label": "Photo focus" });
+        [["", "Focus: automatic"], ["top", "Focus: top (faces near the top)"], ["upper", "Focus: upper middle"], ["center", "Focus: middle"], ["bottom", "Focus: bottom"]].forEach(([v, l]) => sel.appendChild(el("option", { value: v }, l)));
+        sel.value = map[obj[f.k]] || "";
+        sel.addEventListener("change", () => {
+          if (sel.value) map[obj[f.k]] = sel.value;
+          else delete map[obj[f.k]];
+          changed({ now: true });
+        });
+        box.appendChild(sel);
+      }
     };
     draw(false);
     return box;

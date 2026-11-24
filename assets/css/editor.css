@@ -134,3 +134,6 @@ body.ed-panel-open .ed-bar{left:calc((100vw - min(460px,100vw)) / 2)}
 .ed-pre-row{display:flex;justify-content:space-between;align-items:center}
 .ed-pre-row .ed-check{font-size:13px;gap:6px}
 .ed-pre-row .ed-check input{width:16px;height:16px}
+
+.ed-image{flex-wrap:wrap}
+.ed-focus{flex-basis:100%;border:1.5px solid var(--line);border-radius:8px;padding:6px 8px;font:13px var(--body);color:var(--navy);background:var(--white)}

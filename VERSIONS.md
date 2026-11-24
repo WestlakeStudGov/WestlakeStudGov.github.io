@@ -4,6 +4,7 @@ Small changes go up by .1 (1.1, 1.2 ... 1.9, 1.10, 1.11). Big changes that make 
 
 | Version | Date | What changed |
 |---|---|---|
+| 1.12 | 2026-11-23 | Promoted and school events show as small cards below our events; faces stay in view on photos (plus a Focus setting in edit mode); new Christmas photos instead of the jar photo; scoreboard labels fit on phones |
 | 1.11 | 2026-11-23 | W-with-lightning logo on the page-change screen (editable in edit mode) |
 | 1.10 | 2026-11-23 | Presets tab in edit mode: add presets directly, rename and delete them, choose which ones events get automatically |
 | 1.9 | 2026-11-23 | Event dates say Today / Tomorrow / Today and tomorrow / Now through; gold TODAY tag on events happening today |

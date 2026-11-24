@@ -58,8 +58,12 @@
     return src;
   }
   WSG.imgSrc = imgSrc;
+  // Where a photo is anchored when it gets cropped (set per photo in edit mode: top, middle or bottom)
+  const FOCUS = { top: "50% 12%", upper: "50% 30%", center: "50% 50%", bottom: "50% 88%" };
   function img(src, alt, label, extra = "") {
-    return `<img src="${esc(imgSrc(src, label))}" alt="${esc(alt || "")}" loading="lazy" decoding="async" ${extra}>`;
+    const f = src && WSG.data && WSG.data.site && (WSG.data.site.photoFocus || {})[src];
+    const pos = f && FOCUS[f] ? ` style="object-position:${FOCUS[f]}"` : "";
+    return `<img src="${esc(imgSrc(src, label))}" alt="${esc(alt || "")}" loading="lazy" decoding="async"${pos} ${extra}>`;
   }
   const media = (src, alt, label, cls = "") => `<div class="media ${cls}">${img(src, alt, label)}</div>`;
 
@@ -220,9 +224,9 @@
     ["school", "Westlake bolt", /./],
   ];
   // Real photos (Unsplash, free to use; see assets/presets/photos/CREDITS.md), how many of each kind
-  const PHOTO_COUNT = { volleyball: 2, basketball: 2, football: 2, soccer: 2, baseball: 2, softball: 1, tennis: 1, wrestling: 1, swim: 1, track: 2, golf: 1, cheer: 1, christmas: 1, dance: 2, concert: 2, theater: 2, community: 2 };
+  const PHOTO_COUNT = { volleyball: 2, basketball: 2, football: 2, soccer: 2, baseball: 2, softball: 1, tennis: 1, wrestling: 1, swim: 1, track: 2, golf: 1, cheer: 1, christmas: 4, dance: 2, concert: 2, theater: 2, community: 2 };
   const presetFiles = (k) =>
-    PHOTO_COUNT[k] ? Array.from({ length: PHOTO_COUNT[k] }, (_, i) => `assets/presets/photos/${k}-${i + 1}.jpg`) : [`assets/presets/${k}-navy.svg`, `assets/presets/${k}-blue.svg`];
+    PHOTO_COUNT[k] ? Array.from({ length: PHOTO_COUNT[k] }, (_, i) => `assets/presets/photos/${k === "christmas" ? "giving" : k}-${i + 1}.jpg`) : [`assets/presets/${k}-navy.svg`, `assets/presets/${k}-blue.svg`];
   const BUILTIN_PRESETS = PRESET_KINDS.flatMap(([k, label]) =>
     presetFiles(k).map((src, i, all) => ({ src, label: all.length > 1 ? `${label} ${i + 1}` : label, kind: k }))
   ).concat([  ]);
@@ -285,7 +289,7 @@
     };
     // forced first, then anything today or tomorrow, then big events, then the rest by date
     const rank = (e) => (e.homeShow === "always" ? 0 : (days(e) ?? 99) <= 1 ? 1 : e.ours && e.featured ? 2 : 3);
-    return allEvents()
+    const list = allEvents()
       .filter((e) => !isPast(e) && e.homeShow !== "never")
       .filter((e) => {
         if (e.homeShow === "always") return true;
@@ -294,8 +298,9 @@
         if (!e.ours) return n <= 1; // promoted and school events: today or tomorrow only
         return n <= (e.featured ? 92 : 31); // big events 3 months ahead, the rest 1 month
       })
-      .sort((a, b) => rank(a) - rank(b) || byStart(a, b))
-      .slice(0, 6);
+      .sort((a, b) => rank(a) - rank(b) || byStart(a, b));
+    // Our events get the big spots; promoted and school events go small, below all of ours
+    return { ours: list.filter((e) => e.ours).slice(0, 6), promo: list.filter((e) => !e.ours).slice(0, 4) };
   }
 
   /* edit pins (only shown in edit mode) */
@@ -650,8 +655,9 @@
     const words = (s.name || "Student Government").split(/\s+/);
     const last = words.pop();
     const picks = homePicks();
-    const featured = picks.slice(0, 3);
-    const more = picks.slice(3);
+    const featured = picks.ours.slice(0, 3);
+    const more = picks.ours.slice(3);
+    const promo = picks.promo;
     const groups = D().committees;
     const statement = esc(s.intro || "")
       .split(/\s+/)
@@ -704,6 +710,11 @@
             : `<div class="empty">New events are on the way.</div>`
         }
         ${more.length ? `<div class="ev-grid" style="margin-top:20px">${more.map((e) => evCard(e)).join("")}</div>` : ""}
+        ${
+          promo.length
+            ? `<div class="promo-mini"><div class="eyebrow rv">Also happening at Westlake</div><div class="ev-grid mini-grid">${promo.map((e) => evCard(e, { small: true })).join("")}</div></div>`
+            : ""
+        }
       </div>
     </section>
 
@@ -783,8 +794,8 @@
       <div class="ev-section"><div class="eyebrow">Around Westlake</div><h2>Also happening</h2><p class="muted">Other school events we're promoting.</p>
         ${
           other.length
-            ? `<div class="ev-grid ev-clip">${other.map((e, i) => evCard(e, { cls: i >= 9 ? "ev-extra" : "" })).join("")}</div>${
-                other.length > 9 ? `<button class="btn btn-line ev-more-btn" type="button" data-showmore>Show all ${other.length} events <span class="arr">↓</span></button>` : ""
+            ? `<div class="ev-grid mini-grid ev-clip">${other.map((e, i) => evCard(e, { small: true, cls: i >= 12 ? "ev-extra" : "" })).join("")}</div>${
+                other.length > 12 ? `<button class="btn btn-line ev-more-btn" type="button" data-showmore>Show all ${other.length} events <span class="arr">↓</span></button>` : ""
               }`
             : `<div class="empty">Nothing else on the calendar right now.</div>`
         }</div>
@@ -1388,7 +1399,7 @@
       const im = $(".phero-media img", ph);
       if (im) {
         gsap.fromTo(im, { scale: 1.15 }, { scale: 1, duration: 1.6, ease: "power2.out" });
-        gsap.to(im, { yPercent: 15, ease: "none", scrollTrigger: { trigger: ph, start: "top top", end: "bottom top", scrub: SMOOTH } });
+        gsap.to(im, { yPercent: 8, ease: "none", scrollTrigger: { trigger: ph, start: "top top", end: "bottom top", scrub: SMOOTH } });
       }
     });
     // Word-by-word statement

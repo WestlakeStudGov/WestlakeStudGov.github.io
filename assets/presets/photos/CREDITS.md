@@ -30,4 +30,7 @@ Sports, arts and community photos are from Unsplash (unsplash.com) under the Uns
 | theater-2.jpg | https://unsplash.com/photos/red-theater-curtain-WW1jsInXgwM |
 | community-1.jpg | https://unsplash.com/photos/festival-stalls-with-colorful-bunting-9xsXiWvjnLQ |
 | community-2.jpg | https://unsplash.com/photos/three-persons-standing-front-of-field-S5DEUg2yUVU |
-| christmas-1.jpg | Photo of Westlake's Christmas Jars, provided by student government |
+| giving-1.jpg | https://unsplash.com/photos/person-holding-white-gift-card-Rv_UID0uyMM |
+| giving-2.jpg | https://unsplash.com/photos/person-holding-present-box-zMdOBBNPB5o |
+| giving-3.jpg | https://unsplash.com/photos/illuminated-jar-with-festive-winter-scene-inside-g69INeWFAz0 |
+| giving-4.jpg | https://unsplash.com/photos/a-decorated-christmas-tree-in-front-of-a-fireplace-3UQybRpwpso |
