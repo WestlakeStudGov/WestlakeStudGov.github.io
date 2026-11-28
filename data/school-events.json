@@ -1,9 +1,9 @@
 {
  "source": "https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/28516/cms/events/generate_ical?filter_ids&section_ids",
- "updated": "2026-11-27T12:05:05Z",
+ "updated": "2026-11-28T11:56:19Z",
  "events": [
   {
-   "id": "whs-032fd0ddf71c4481b87825a9",
+   "id": "whs-7024f333ecc34413899ab398",
    "title": "Boys Basketball vs Lehi/Girls vs Lone Peak",
    "start": "2026-12-01T15:00",
    "end": "2026-12-01T21:30",
@@ -13,7 +13,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-4c709eb324134ffdad69d4b9",
+   "id": "whs-566301a10bcd40078bd34570",
    "title": "Zero Fatalities",
    "start": "2026-12-01T18:00",
    "end": "2026-12-01T19:00",
@@ -23,7 +23,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-be08fc0bbdc24a85afc6aa77",
+   "id": "whs-09d8290f4236447d99d85cd6",
    "title": "Girls Wrestling vs Corner Canyon",
    "start": "2026-12-03T18:00",
    "end": "2026-12-03T21:00",
@@ -33,7 +33,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-4ffe77351e9e4a79bb8e1d4c",
+   "id": "whs-c420c18486ce43b3addcce1f",
    "title": "Ballroom Concert",
    "start": "2026-12-04T17:00",
    "end": "2026-12-04T18:30",
@@ -43,7 +43,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-a56da1fa77a14d78ae103cb3",
+   "id": "whs-20cd87fd9bb24e67b5ade140",
    "title": "Orchestra Concert",
    "start": "2026-12-07T19:00",
    "end": "2026-12-07T21:00",
@@ -53,7 +53,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-ba8580a34fbc48bbac885bfa",
+   "id": "whs-6f17dc5e889b4d2db1ed27e4",
    "title": "Band Concert",
    "start": "2026-12-08T19:00",
    "end": "2026-12-08T21:00",
@@ -63,7 +63,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-a5cc8c9642284b3da5a5fba8",
+   "id": "whs-e291e29d5dcc488d9b8b4e59",
    "title": "Wrestling vs Mountain Ridge",
    "start": "2026-12-09T17:00",
    "end": "2026-12-09T20:45",
@@ -73,7 +73,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-e53b6fd653c946b2883b4bbd",
+   "id": "whs-d3166843b4e54efab2c9db20",
    "title": "Jazz Band Concert",
    "start": "2026-12-09T19:00",
    "end": "2026-12-09T21:00",
@@ -83,7 +83,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-9427cd8a0f874e26b0a050f3",
+   "id": "whs-66848c7afe544307b4750eb3",
    "title": "Choir Concert",
    "start": "2026-12-14T19:00",
    "end": "2026-12-14T21:00",
@@ -93,7 +93,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-f734f5ba92c949b19c800989",
+   "id": "whs-2251b884fc8248118d50cc19",
    "title": "Girls Wrestling vs Hillcrest",
    "start": "2026-12-15T18:00",
    "end": "2026-12-15T21:00",
@@ -103,7 +103,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-ea0b2ab016f44edf8d1bf87e",
+   "id": "whs-48543ad1d8e0411897bf9f68",
    "title": "Dance Concerts",
    "start": "2026-12-16T17:00",
    "end": "2026-12-16T19:00",
@@ -113,7 +113,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-3da9e0e6782c4be7ab1538dc",
+   "id": "whs-00e9521e7daf4eb4bfa7462f",
    "title": "Wrestling vs Copper Hills",
    "start": "2026-12-16T17:00",
    "end": "2026-12-16T21:00",
@@ -123,7 +123,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-933b60d35bfb4bbf883eef6e",
+   "id": "whs-636215ab3a3e4e6e90502cca",
    "title": "Dance Concert",
    "start": "2026-12-16T19:00",
    "end": "2026-12-16T21:00",
@@ -133,7 +133,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-60cb484a84dd4fab932d94a5",
+   "id": "whs-bd962960ba364a95a1bf3bbf",
    "title": "Basketball vs Herriman",
    "start": "2027-01-05T15:00",
    "end": "2027-01-05T22:00",
@@ -143,7 +143,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-05fc8b2c7b044db59059b902",
+   "id": "whs-5822af06971e4b1699dd81df",
    "title": "Girls Wrestling vs Bingham",
    "start": "2027-01-13T18:00",
    "end": "2027-01-13T21:00",
@@ -153,7 +153,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-4e1a2ea2de154b4da88aad45",
+   "id": "whs-426521cccdd148a3a9667781",
    "title": "Basketball vs Copper Hills",
    "start": "2027-01-15T15:00",
    "end": "2027-01-15T21:30",
@@ -163,7 +163,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-b5c17c2fcf484a01bed373a7",
+   "id": "whs-6b2611d2cfd54aed803ffcf8",
    "title": "Boys Wrestling vs Cedar Valley",
    "start": "2027-01-20T17:00",
    "end": "2027-01-20T21:00",
@@ -173,7 +173,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-f282fd2ad825431e943c90bf",
+   "id": "whs-ed610820d47043df87d42b0e",
    "title": "Boys Basketball vs Bingham",
    "start": "2027-01-22T15:30",
    "end": "2027-01-22T21:00",
@@ -183,7 +183,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-6c43f5ce51284c868ddbcc2f",
+   "id": "whs-fa7af816ce104dc7804f6880",
    "title": "Orchestra Concert",
    "start": "2027-02-01T19:00",
    "end": "2027-02-01T21:00",
@@ -193,7 +193,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-3e44e6ff68204d5898290869",
+   "id": "whs-f05a603970e749e1b59a2078",
    "title": "Basketball vs Cedar Valley",
    "start": "2027-02-02T15:00",
    "end": "2027-02-02T21:45",
@@ -203,7 +203,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-37dc3d62769840c5b8489e63",
+   "id": "whs-8d3c69e4f8924cf4919d0851",
    "title": "Zero Fatalities",
    "start": "2027-02-02T18:00",
    "end": "2027-02-02T19:00",
@@ -213,7 +213,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-269e135d076546ab9b00467a",
+   "id": "whs-338b1098f91743e8a908a435",
    "title": "Basketball vs Riverton",
    "start": "2027-02-12T15:00",
    "end": "2027-02-12T21:30",
@@ -223,7 +223,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-fcbe35c19be041db88386d33",
+   "id": "whs-2917a86c11c44ad2bc45ad9d",
    "title": "Girls Basketball vs Bingham",
    "start": "2027-02-16T15:30",
    "end": "2027-02-16T21:00",
@@ -233,7 +233,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-e7dc2e343feb4d6ab1e95933",
+   "id": "whs-0cd5eae6f5e04389955b30cd",
    "title": "Basketball vs Mountain Ridge",
    "start": "2027-02-19T15:00",
    "end": "2027-02-19T21:30",
@@ -243,7 +243,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-282f5157935243bc9891fc89",
+   "id": "whs-0ee919ce439a40f4b46f3b09",
    "title": "Jazz Concert",
    "start": "2027-02-25T19:00",
    "end": "2027-02-25T21:15",
@@ -253,7 +253,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-38da64b7f2834a3fbec395d3",
+   "id": "whs-bc88966795b94ef198b29730",
    "title": "Orchestra Concert",
    "start": "2027-03-01T19:00",
    "end": "2027-03-01T20:30",
@@ -263,7 +263,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-9a35e0e473b5478d9c59f960",
+   "id": "whs-0369bd2ea9ff4cd0927ba6ff",
    "title": "Cluster Concert",
    "start": "2027-03-03T19:00",
    "end": "2027-03-03T21:30",
@@ -273,7 +273,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-751aa619f8ec4c50a5e5f493",
+   "id": "whs-4835e97a78754ddabe75b58a",
    "title": "Band Concert",
    "start": "2027-03-04T19:00",
    "end": "2027-03-04T21:00",
@@ -283,7 +283,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-638a3a27e93d4a3786f5e462",
+   "id": "whs-89fa471ddb8f405cba4cb6b4",
    "title": "Drama Region Showcase",
    "start": "2027-03-08T19:00",
    "end": "2027-03-08T20:30",
@@ -293,7 +293,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-68de69735c494e29b709708d",
+   "id": "whs-46b97da5f80d4c169b306dba",
    "title": "Region Chamber Choir Festival",
    "start": "2027-03-23",
    "end": "",
@@ -303,7 +303,7 @@
    "moreDates": []
   },
   {
-   "id": "whs-43d3b052307542e1b37c98fd",
+   "id": "whs-3d066a5589b14588a106da37",
    "title": "Spring Musical",
    "start": "2027-03-25T19:00",
    "end": "2027-03-25T22:00",
@@ -329,13 +329,23 @@
    ]
   },
   {
-   "id": "whs-9dc27b01adab4a83bf72ccc7",
+   "id": "whs-9b3dfc14a6e54348994e4721",
    "title": "Zero Fatalities",
    "start": "2027-04-22T18:00",
    "end": "2027-04-22T19:00",
    "location": "Auditorium",
    "description": "",
    "category": "community",
+   "moreDates": []
+  },
+  {
+   "id": "whs-f7bba43261424a089c0ef270",
+   "title": "Percussion Concert",
+   "start": "2027-04-27T19:00",
+   "end": "2027-04-27T21:00",
+   "location": "",
+   "description": "",
+   "category": "concert",
    "moreDates": []
   }
  ]
